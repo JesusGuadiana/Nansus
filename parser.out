@@ -1,0 +1,213 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    FUNCTION
+    NOT
+    OR
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PRGM ID vars modules MAIN body END
+Rule 2     vars -> type vars_prime vars_fourth_prime
+Rule 3     vars_prime -> ID vars_second_prime
+Rule 4     vars_second_prime -> LEFTB exp RIGHTB vars_third_prime
+Rule 5     vars_second_prime -> empty
+Rule 6     vars_third_prime -> LEFTB exp RIGHTB
+Rule 7     vars_third_prime -> empty
+Rule 8     vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime
+Rule 9     vars_fourth_prime -> EOS
+Rule 10    type -> TYPEINT
+Rule 11    type -> TYPEFLOAT
+Rule 12    type -> TYPECHAR
+Rule 13    body -> statement EOS body_prime
+Rule 14    body_prime -> body
+Rule 15    body_prime -> empty
+Rule 16    modules_prime -> type
+Rule 17    modules_prime -> NOTYPE
+Rule 18    modules_second_prime -> type ID modules_third_prime
+Rule 19    modules_third_prime -> SEPARATOR modules_second_prime
+Rule 20    modules_third_prime -> RIGHTP LEFTP vars body RIGHTP
+Rule 21    statement -> assignment
+Rule 22    statement -> print
+Rule 23    statement -> functioncall
+Rule 24    statement -> condition
+Rule 25    statement -> specialfunction
+Rule 26    increment -> ID increment_prime
+Rule 27    increment_prime -> EQUALS increment_second_prime
+Rule 28    increment_prime -> PLUS PLUS
+Rule 29    increment_second_prime -> CSTI PLUS ID
+Rule 30    increment_second_prime -> ID PLUS CSTI
+Rule 31    assignment -> ID assignment_prime EQUALS expression
+Rule 32    assignment_prime -> empty
+Rule 33    assignment_prime -> LEFTB exp RIGHTB assignment
+Rule 34    assignment_second_prime -> empty
+Rule 35    assignment_second_prime -> LEFTB exp RIGHTB
+Rule 36    condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+Rule 37    condition -> FOR LEFTP assignment condition_prime
+Rule 38    condition -> IF condition_second_prime
+Rule 39    condition_prime -> SEPARATOR assignment condition_prime
+Rule 40    condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB
+Rule 41    condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime
+Rule 42    condition_third_prime -> statement condition_fourth_prime
+Rule 43    condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime
+Rule 44    condition_fourth_prime -> ELSEIF condition_second_prime
+Rule 45    condition_fourth_prime -> ELSE condition_fifth_prime
+Rule 46    condition_fourth_prime -> empty
+Rule 47    condition_fifth_prime -> statement
+Rule 48    condition_fifth_prime -> LEFTB body RIGHTB
+Rule 49    functioncall -> ID LEFTP exp functioncall_prime
+Rule 50    functioncall_prime -> SEPARATOR exp functioncall_prime
+Rule 51    functioncall_prime -> RIGHTP
+Rule 52    expression -> exp expression_prime
+Rule 53    expression_prime -> exp expression_prime
+Rule 54    expression_prime -> GREATER
+Rule 55    expression_prime -> LESS
+Rule 56    expression_prime -> EQUAL
+Rule 57    expression_prime -> NOTEQUAL
+Rule 58    expression_prime -> GREATEREQUAL
+Rule 59    expression_prime -> LESSEQUAL
+Rule 60    expression_prime -> empty
+Rule 61    print -> PRINT LEFTP print_prime
+Rule 62    print_prime -> STRING RIGHTP
+Rule 63    print_prime -> expression RIGHTP
+Rule 64    exp -> term exp_prime
+Rule 65    exp_prime -> PLUS term exp_prime
+Rule 66    exp_prime -> MINUS term exp_prime
+Rule 67    exp_prime -> empty
+Rule 68    operand -> CSTI
+Rule 69    operand -> CSTF
+Rule 70    operand -> ID operand_prime
+Rule 71    operand_prime -> empty
+Rule 72    operand_prime -> LEFTB exp RIGHTB operand_second_prime
+Rule 73    operand_prime -> LEFTP exp operand_third_prime
+Rule 74    operand_second_prime -> empty
+Rule 75    operand_second_prime -> LEFTB exp RIGHTB
+Rule 76    operand_third_prime -> SEPARATOR exp operand_third_prime
+Rule 77    operand_third_prime -> RIGHTP
+Rule 78    term -> factor term_prime
+Rule 79    term_prime -> MULTIPLY factor term_prime
+Rule 80    term_prime -> DIVIDE factor term_prime
+Rule 81    term_prime -> empty
+Rule 82    factor -> LEFTP expression RIGHTP
+Rule 83    factor -> operand
+Rule 84    factor -> PLUS operand
+Rule 85    factor -> MINUS operand
+Rule 86    specialfunction -> JEDO POINT specialfunction_prime
+Rule 87    specialfunction_prime -> CIRCLE LEFTP exp RIGHTP
+Rule 88    specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP
+Rule 89    specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP
+Rule 90    specialfunction_prime -> FORWARD LEFTP exp RIGHTP
+Rule 91    specialfunction_prime -> BACK LEFTP exp RIGHTP
+Rule 92    specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP
+Rule 93    specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP
+Rule 94    specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP
+Rule 95    specialfunction_prime -> ARCH LEFTP exp RIGHTP
+Rule 96    specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP
+Rule 97    specialfunction_prime -> THICKNESS LEFTP exp RIGHTP
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARCH                 : 95
+BACK                 : 91
+CIRCLE               : 87
+COLOR                : 94
+CSTF                 : 69
+CSTI                 : 29 30 68
+DIVIDE               : 80
+ELSE                 : 45
+ELSEIF               : 44
+END                  : 1
+EOS                  : 9 13 40 40
+EQUAL                : 56
+EQUALS               : 27 31
+FOR                  : 37
+FORWARD              : 90
+FUNCTION             : 
+GREATER              : 54
+GREATEREQUAL         : 58
+ID                   : 1 3 18 26 29 30 31 49 70
+IF                   : 38
+JEDO                 : 86
+LEFTB                : 4 6 33 35 36 40 43 48 72 75
+LEFTP                : 20 36 37 41 49 61 73 82 87 88 89 90 91 92 93 94 95 96 97
+LESS                 : 55
+LESSEQUAL            : 59
+LINE                 : 96
+MAIN                 : 1
+MINUS                : 66 85
+MULTIPLY             : 79
+NOT                  : 
+NOTEQUAL             : 57
+NOTYPE               : 17
+OR                   : 
+PLUS                 : 28 28 29 30 65 84
+POINT                : 86
+PRGM                 : 1
+PRINT                : 61
+RECTANGLE            : 89
+RIGHTB               : 4 6 33 35 36 40 43 48 72 75
+RIGHTP               : 20 20 36 40 41 51 62 63 77 82 87 88 89 90 91 92 93 94 95 96 97
+SEPARATOR            : 8 19 39 50 76 88 89 94 94 96
+SQUARE               : 88
+STRING               : 62
+THICKNESS            : 97
+TURNLEFT             : 93
+TURNRIGHT            : 92
+TYPECHAR             : 12
+TYPEFLOAT            : 11
+TYPEINT              : 10
+WHILE                : 36
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 21 33 37 39
+assignment_prime     : 31
+assignment_second_prime : 
+body                 : 1 14 20 36 40 43 48
+body_prime           : 13
+compoundexp          : 36 40 41
+condition            : 24
+condition_fifth_prime : 45
+condition_fourth_prime : 42 43
+condition_prime      : 37 39
+condition_second_prime : 38 44
+condition_third_prime : 41
+empty                : 5 7 15 32 34 46 60 67 71 74 81
+exp                  : 4 6 33 35 49 50 52 53 72 73 75 76 87 88 88 89 89 90 91 92 93 94 94 94 95 96 96 97
+exp_prime            : 64 65 66
+expression           : 31 63 82
+expression_prime     : 52 53
+factor               : 78 79 80
+functioncall         : 23
+functioncall_prime   : 49 50
+increment            : 40
+increment_prime      : 26
+increment_second_prime : 27
+modules              : 1
+modules_prime        : 
+modules_second_prime : 19
+modules_third_prime  : 18
+operand              : 83 84 85
+operand_prime        : 70
+operand_second_prime : 72
+operand_third_prime  : 73 76
+print                : 22
+print_prime          : 61
+program              : 0
+specialfunction      : 25
+specialfunction_prime : 86
+statement            : 13 42 47
+term                 : 64 65 66
+term_prime           : 78 79 80
+type                 : 2 16 18
+vars                 : 1 20
+vars_fourth_prime    : 2 8
+vars_prime           : 2 8
+vars_second_prime    : 3
+vars_third_prime     : 4
+
