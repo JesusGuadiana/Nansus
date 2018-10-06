@@ -9,12 +9,12 @@ import ply.lex as lex
 tokens = ( "ID", "PLUS", "MINUS", "MULTIPLY", "DIVIDE",
         "CSTI","CSTF", "PRGM", "MAIN", "END", "FUNCTION",
         "EOS","LEFTP", "RIGHTP", "LEFTB", "RIGHTB", "WHILE",
-        "FOR","IF", "ELSE", "ELSEIF", "PRINT", "NOT", "AND",
+        "FOR","IF", "ELSE", "ELSEIF", "PRINT", "AND",
         "OR", "JEDO","CIRCLE", "SQUARE", "RECTANGLE", "FORWARD",
         "BACK", "TURNRIGHT", "TURNLEFT", "COLOR", "ARCH", "LINE",
         "THICKNESS","SEPARATOR", "POINT", "EQUALS", "TYPEINT",
         "TYPEFLOAT", "TYPECHAR", "STRING", "NOTYPE", "GREATER",
-        "GREATEREQUAL","LESS", "LESSEQUAL", "EQUAL", "NOTEQUAL" )
+        "GREATEREQUAL","LESS", "LESSEQUAL", "EQUAL", "NOTEQUAL", "EMPTY")
 
 # Tokens
 t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -39,7 +39,6 @@ t_LEFTP = r'\('
 t_RIGHTP = r'\)'
 t_LEFTB = r'\['
 t_RIGHTB = r'\]'
-t_NOT = r'\!'
 t_AND = r'\&\&'
 t_OR = r'\|\|'
 t_JEDO = r'jedo'
@@ -67,7 +66,8 @@ t_LESS = r'\<'
 t_LESSEQUAL = r'\<\='
 t_EQUAL = r'\=\='
 t_NOTEQUAL = r'\!\='
-t_TYPEINT = r'\d+'
+t_TYPEINT = r'int'
+T_EMPTY = r'empty'
 
 # Ignored characters
 t_ignore = " \t"

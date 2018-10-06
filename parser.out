@@ -1,12 +1,5 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    AND
-    FUNCTION
-    NOT
-    OR
-
 Grammar
 
 Rule 0     S' -> program
@@ -14,9 +7,9 @@ Rule 1     program -> PRGM ID vars modules MAIN body END
 Rule 2     vars -> type vars_prime vars_fourth_prime
 Rule 3     vars_prime -> ID vars_second_prime
 Rule 4     vars_second_prime -> LEFTB exp RIGHTB vars_third_prime
-Rule 5     vars_second_prime -> empty
+Rule 5     vars_second_prime -> EMPTY
 Rule 6     vars_third_prime -> LEFTB exp RIGHTB
-Rule 7     vars_third_prime -> empty
+Rule 7     vars_third_prime -> EMPTY
 Rule 8     vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime
 Rule 9     vars_fourth_prime -> EOS
 Rule 10    type -> TYPEINT
@@ -24,190 +17,3553 @@ Rule 11    type -> TYPEFLOAT
 Rule 12    type -> TYPECHAR
 Rule 13    body -> statement EOS body_prime
 Rule 14    body_prime -> body
-Rule 15    body_prime -> empty
-Rule 16    modules_prime -> type
-Rule 17    modules_prime -> NOTYPE
-Rule 18    modules_second_prime -> type ID modules_third_prime
-Rule 19    modules_third_prime -> SEPARATOR modules_second_prime
-Rule 20    modules_third_prime -> RIGHTP LEFTP vars body RIGHTP
-Rule 21    statement -> assignment
-Rule 22    statement -> print
-Rule 23    statement -> functioncall
-Rule 24    statement -> condition
-Rule 25    statement -> specialfunction
-Rule 26    increment -> ID increment_prime
-Rule 27    increment_prime -> EQUALS increment_second_prime
-Rule 28    increment_prime -> PLUS PLUS
-Rule 29    increment_second_prime -> CSTI PLUS ID
-Rule 30    increment_second_prime -> ID PLUS CSTI
-Rule 31    assignment -> ID assignment_prime EQUALS expression
-Rule 32    assignment_prime -> empty
-Rule 33    assignment_prime -> LEFTB exp RIGHTB assignment
-Rule 34    assignment_second_prime -> empty
-Rule 35    assignment_second_prime -> LEFTB exp RIGHTB
-Rule 36    condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
-Rule 37    condition -> FOR LEFTP assignment condition_prime
-Rule 38    condition -> IF condition_second_prime
-Rule 39    condition_prime -> SEPARATOR assignment condition_prime
-Rule 40    condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB
-Rule 41    condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime
-Rule 42    condition_third_prime -> statement condition_fourth_prime
-Rule 43    condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime
-Rule 44    condition_fourth_prime -> ELSEIF condition_second_prime
-Rule 45    condition_fourth_prime -> ELSE condition_fifth_prime
-Rule 46    condition_fourth_prime -> empty
-Rule 47    condition_fifth_prime -> statement
-Rule 48    condition_fifth_prime -> LEFTB body RIGHTB
-Rule 49    functioncall -> ID LEFTP exp functioncall_prime
-Rule 50    functioncall_prime -> SEPARATOR exp functioncall_prime
-Rule 51    functioncall_prime -> RIGHTP
-Rule 52    expression -> exp expression_prime
-Rule 53    expression_prime -> exp expression_prime
-Rule 54    expression_prime -> GREATER
-Rule 55    expression_prime -> LESS
-Rule 56    expression_prime -> EQUAL
-Rule 57    expression_prime -> NOTEQUAL
-Rule 58    expression_prime -> GREATEREQUAL
-Rule 59    expression_prime -> LESSEQUAL
-Rule 60    expression_prime -> empty
-Rule 61    print -> PRINT LEFTP print_prime
-Rule 62    print_prime -> STRING RIGHTP
-Rule 63    print_prime -> expression RIGHTP
-Rule 64    exp -> term exp_prime
-Rule 65    exp_prime -> PLUS term exp_prime
-Rule 66    exp_prime -> MINUS term exp_prime
-Rule 67    exp_prime -> empty
-Rule 68    operand -> CSTI
-Rule 69    operand -> CSTF
-Rule 70    operand -> ID operand_prime
-Rule 71    operand_prime -> empty
-Rule 72    operand_prime -> LEFTB exp RIGHTB operand_second_prime
-Rule 73    operand_prime -> LEFTP exp operand_third_prime
-Rule 74    operand_second_prime -> empty
-Rule 75    operand_second_prime -> LEFTB exp RIGHTB
-Rule 76    operand_third_prime -> SEPARATOR exp operand_third_prime
-Rule 77    operand_third_prime -> RIGHTP
-Rule 78    term -> factor term_prime
-Rule 79    term_prime -> MULTIPLY factor term_prime
-Rule 80    term_prime -> DIVIDE factor term_prime
-Rule 81    term_prime -> empty
-Rule 82    factor -> LEFTP expression RIGHTP
-Rule 83    factor -> operand
-Rule 84    factor -> PLUS operand
-Rule 85    factor -> MINUS operand
-Rule 86    specialfunction -> JEDO POINT specialfunction_prime
-Rule 87    specialfunction_prime -> CIRCLE LEFTP exp RIGHTP
-Rule 88    specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP
-Rule 89    specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP
-Rule 90    specialfunction_prime -> FORWARD LEFTP exp RIGHTP
-Rule 91    specialfunction_prime -> BACK LEFTP exp RIGHTP
-Rule 92    specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP
-Rule 93    specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP
-Rule 94    specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP
-Rule 95    specialfunction_prime -> ARCH LEFTP exp RIGHTP
-Rule 96    specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP
-Rule 97    specialfunction_prime -> THICKNESS LEFTP exp RIGHTP
+Rule 15    body_prime -> EMPTY
+Rule 16    modules -> FUNCTION modules_prime ID LEFTP modules_second_prime
+Rule 17    modules_prime -> type
+Rule 18    modules_prime -> NOTYPE
+Rule 19    modules_second_prime -> type ID modules_third_prime
+Rule 20    modules_third_prime -> SEPARATOR modules_second_prime
+Rule 21    modules_third_prime -> RIGHTP LEFTP vars body RIGHTP
+Rule 22    statement -> assignment
+Rule 23    statement -> print
+Rule 24    statement -> functioncall
+Rule 25    statement -> condition
+Rule 26    statement -> specialfunction
+Rule 27    increment -> ID increment_prime
+Rule 28    increment_prime -> EQUALS increment_second_prime
+Rule 29    increment_prime -> PLUS PLUS
+Rule 30    increment_second_prime -> CSTI PLUS ID
+Rule 31    increment_second_prime -> ID PLUS CSTI
+Rule 32    assignment -> ID assignment_prime EQUALS expression
+Rule 33    assignment_prime -> EMPTY
+Rule 34    assignment_prime -> LEFTB exp RIGHTB assignment_second_prime
+Rule 35    assignment_second_prime -> EMPTY
+Rule 36    assignment_second_prime -> LEFTB exp RIGHTB
+Rule 37    condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+Rule 38    condition -> FOR LEFTP assignment condition_prime
+Rule 39    condition -> IF condition_second_prime
+Rule 40    condition_prime -> SEPARATOR assignment condition_prime
+Rule 41    condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB
+Rule 42    condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime
+Rule 43    condition_third_prime -> statement condition_fourth_prime
+Rule 44    condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime
+Rule 45    condition_fourth_prime -> ELSEIF condition_second_prime
+Rule 46    condition_fourth_prime -> ELSE condition_fifth_prime
+Rule 47    condition_fourth_prime -> EMPTY
+Rule 48    condition_fifth_prime -> statement
+Rule 49    condition_fifth_prime -> LEFTB body RIGHTB
+Rule 50    functioncall -> ID LEFTP exp functioncall_prime
+Rule 51    functioncall_prime -> SEPARATOR exp functioncall_prime
+Rule 52    functioncall_prime -> RIGHTP
+Rule 53    expression -> exp expression_prime
+Rule 54    expression_prime -> exp expression_prime
+Rule 55    expression_prime -> GREATER
+Rule 56    expression_prime -> LESS
+Rule 57    expression_prime -> EQUAL
+Rule 58    expression_prime -> NOTEQUAL
+Rule 59    expression_prime -> GREATEREQUAL
+Rule 60    expression_prime -> LESSEQUAL
+Rule 61    expression_prime -> EMPTY
+Rule 62    print -> PRINT LEFTP print_prime
+Rule 63    print_prime -> STRING RIGHTP
+Rule 64    print_prime -> expression RIGHTP
+Rule 65    exp -> term exp_prime
+Rule 66    exp_prime -> PLUS term exp_prime
+Rule 67    exp_prime -> MINUS term exp_prime
+Rule 68    exp_prime -> EMPTY
+Rule 69    operand -> CSTI
+Rule 70    operand -> CSTF
+Rule 71    operand -> ID operand_prime
+Rule 72    operand_prime -> EMPTY
+Rule 73    operand_prime -> LEFTB exp RIGHTB operand_second_prime
+Rule 74    operand_prime -> LEFTP exp operand_third_prime
+Rule 75    operand_second_prime -> EMPTY
+Rule 76    operand_second_prime -> LEFTB exp RIGHTB
+Rule 77    operand_third_prime -> SEPARATOR exp operand_third_prime
+Rule 78    operand_third_prime -> RIGHTP
+Rule 79    term -> factor term_prime
+Rule 80    term_prime -> MULTIPLY factor term_prime
+Rule 81    term_prime -> DIVIDE factor term_prime
+Rule 82    term_prime -> EMPTY
+Rule 83    factor -> LEFTP expression RIGHTP
+Rule 84    factor -> operand
+Rule 85    factor -> PLUS operand
+Rule 86    factor -> MINUS operand
+Rule 87    specialfunction -> JEDO POINT specialfunction_prime
+Rule 88    specialfunction_prime -> CIRCLE LEFTP exp RIGHTP
+Rule 89    specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP
+Rule 90    specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP
+Rule 91    specialfunction_prime -> FORWARD LEFTP exp RIGHTP
+Rule 92    specialfunction_prime -> BACK LEFTP exp RIGHTP
+Rule 93    specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP
+Rule 94    specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP
+Rule 95    specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP
+Rule 96    specialfunction_prime -> ARCH LEFTP exp RIGHTP
+Rule 97    specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP
+Rule 98    specialfunction_prime -> THICKNESS LEFTP exp RIGHTP
+Rule 99    compoundexp -> expression compoundexp_prime
+Rule 100   compoundexp_prime -> AND compoundexp
+Rule 101   compoundexp_prime -> OR compoundexp
+Rule 102   compoundexp_prime -> EMPTY
 
 Terminals, with rules where they appear
 
-AND                  : 
-ARCH                 : 95
-BACK                 : 91
-CIRCLE               : 87
-COLOR                : 94
-CSTF                 : 69
-CSTI                 : 29 30 68
-DIVIDE               : 80
-ELSE                 : 45
-ELSEIF               : 44
+AND                  : 100
+ARCH                 : 96
+BACK                 : 92
+CIRCLE               : 88
+COLOR                : 95
+CSTF                 : 70
+CSTI                 : 30 31 69
+DIVIDE               : 81
+ELSE                 : 46
+ELSEIF               : 45
+EMPTY                : 5 7 15 33 35 47 61 68 72 75 82 102
 END                  : 1
-EOS                  : 9 13 40 40
-EQUAL                : 56
-EQUALS               : 27 31
-FOR                  : 37
-FORWARD              : 90
-FUNCTION             : 
-GREATER              : 54
-GREATEREQUAL         : 58
-ID                   : 1 3 18 26 29 30 31 49 70
-IF                   : 38
-JEDO                 : 86
-LEFTB                : 4 6 33 35 36 40 43 48 72 75
-LEFTP                : 20 36 37 41 49 61 73 82 87 88 89 90 91 92 93 94 95 96 97
-LESS                 : 55
-LESSEQUAL            : 59
-LINE                 : 96
+EOS                  : 9 13 41 41
+EQUAL                : 57
+EQUALS               : 28 32
+FOR                  : 38
+FORWARD              : 91
+FUNCTION             : 16
+GREATER              : 55
+GREATEREQUAL         : 59
+ID                   : 1 3 16 19 27 30 31 32 50 71
+IF                   : 39
+JEDO                 : 87
+LEFTB                : 4 6 34 36 37 41 44 49 73 76
+LEFTP                : 16 21 37 38 42 50 62 74 83 88 89 90 91 92 93 94 95 96 97 98
+LESS                 : 56
+LESSEQUAL            : 60
+LINE                 : 97
 MAIN                 : 1
-MINUS                : 66 85
-MULTIPLY             : 79
-NOT                  : 
-NOTEQUAL             : 57
-NOTYPE               : 17
-OR                   : 
-PLUS                 : 28 28 29 30 65 84
-POINT                : 86
+MINUS                : 67 86
+MULTIPLY             : 80
+NOTEQUAL             : 58
+NOTYPE               : 18
+OR                   : 101
+PLUS                 : 29 29 30 31 66 85
+POINT                : 87
 PRGM                 : 1
-PRINT                : 61
-RECTANGLE            : 89
-RIGHTB               : 4 6 33 35 36 40 43 48 72 75
-RIGHTP               : 20 20 36 40 41 51 62 63 77 82 87 88 89 90 91 92 93 94 95 96 97
-SEPARATOR            : 8 19 39 50 76 88 89 94 94 96
-SQUARE               : 88
-STRING               : 62
-THICKNESS            : 97
-TURNLEFT             : 93
-TURNRIGHT            : 92
+PRINT                : 62
+RECTANGLE            : 90
+RIGHTB               : 4 6 34 36 37 41 44 49 73 76
+RIGHTP               : 21 21 37 41 42 52 63 64 78 83 88 89 90 91 92 93 94 95 96 97 98
+SEPARATOR            : 8 20 40 51 77 89 90 95 95 97
+SQUARE               : 89
+STRING               : 63
+THICKNESS            : 98
+TURNLEFT             : 94
+TURNRIGHT            : 93
 TYPECHAR             : 12
 TYPEFLOAT            : 11
 TYPEINT              : 10
-WHILE                : 36
+WHILE                : 37
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment           : 21 33 37 39
-assignment_prime     : 31
-assignment_second_prime : 
-body                 : 1 14 20 36 40 43 48
+assignment           : 22 38 40
+assignment_prime     : 32
+assignment_second_prime : 34
+body                 : 1 14 21 37 41 44 49
 body_prime           : 13
-compoundexp          : 36 40 41
-condition            : 24
-condition_fifth_prime : 45
-condition_fourth_prime : 42 43
-condition_prime      : 37 39
-condition_second_prime : 38 44
-condition_third_prime : 41
-empty                : 5 7 15 32 34 46 60 67 71 74 81
-exp                  : 4 6 33 35 49 50 52 53 72 73 75 76 87 88 88 89 89 90 91 92 93 94 94 94 95 96 96 97
-exp_prime            : 64 65 66
-expression           : 31 63 82
-expression_prime     : 52 53
-factor               : 78 79 80
-functioncall         : 23
-functioncall_prime   : 49 50
-increment            : 40
-increment_prime      : 26
-increment_second_prime : 27
+compoundexp          : 37 41 42 100 101
+compoundexp_prime    : 99
+condition            : 25
+condition_fifth_prime : 46
+condition_fourth_prime : 43 44
+condition_prime      : 38 40
+condition_second_prime : 39 45
+condition_third_prime : 42
+exp                  : 4 6 34 36 50 51 53 54 73 74 76 77 88 89 89 90 90 91 92 93 94 95 95 95 96 97 97 98
+exp_prime            : 65 66 67
+expression           : 32 64 83 99
+expression_prime     : 53 54
+factor               : 79 80 81
+functioncall         : 24
+functioncall_prime   : 50 51
+increment            : 41
+increment_prime      : 27
+increment_second_prime : 28
 modules              : 1
-modules_prime        : 
-modules_second_prime : 19
-modules_third_prime  : 18
-operand              : 83 84 85
-operand_prime        : 70
-operand_second_prime : 72
-operand_third_prime  : 73 76
-print                : 22
-print_prime          : 61
+modules_prime        : 16
+modules_second_prime : 16 20
+modules_third_prime  : 19
+operand              : 84 85 86
+operand_prime        : 71
+operand_second_prime : 73
+operand_third_prime  : 74 77
+print                : 23
+print_prime          : 62
 program              : 0
-specialfunction      : 25
-specialfunction_prime : 86
-statement            : 13 42 47
-term                 : 64 65 66
-term_prime           : 78 79 80
-type                 : 2 16 18
-vars                 : 1 20
+specialfunction      : 26
+specialfunction_prime : 87
+statement            : 13 43 48
+term                 : 65 66 67
+term_prime           : 79 80 81
+type                 : 2 17 19
+vars                 : 1 21
 vars_fourth_prime    : 2 8
 vars_prime           : 2 8
 vars_second_prime    : 3
 vars_third_prime     : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PRGM ID vars modules MAIN body END
+
+    PRGM            shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PRGM . ID vars modules MAIN body END
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PRGM ID . vars modules MAIN body END
+    (2) vars -> . type vars_prime vars_fourth_prime
+    (10) type -> . TYPEINT
+    (11) type -> . TYPEFLOAT
+    (12) type -> . TYPECHAR
+
+    TYPEINT         shift and go to state 6
+    TYPEFLOAT       shift and go to state 7
+    TYPECHAR        shift and go to state 8
+
+    vars                           shift and go to state 4
+    type                           shift and go to state 5
+
+state 4
+
+    (1) program -> PRGM ID vars . modules MAIN body END
+    (16) modules -> . FUNCTION modules_prime ID LEFTP modules_second_prime
+
+    FUNCTION        shift and go to state 10
+
+    modules                        shift and go to state 9
+
+state 5
+
+    (2) vars -> type . vars_prime vars_fourth_prime
+    (3) vars_prime -> . ID vars_second_prime
+
+    ID              shift and go to state 12
+
+    vars_prime                     shift and go to state 11
+
+state 6
+
+    (10) type -> TYPEINT .
+
+    ID              reduce using rule 10 (type -> TYPEINT .)
+
+
+state 7
+
+    (11) type -> TYPEFLOAT .
+
+    ID              reduce using rule 11 (type -> TYPEFLOAT .)
+
+
+state 8
+
+    (12) type -> TYPECHAR .
+
+    ID              reduce using rule 12 (type -> TYPECHAR .)
+
+
+state 9
+
+    (1) program -> PRGM ID vars modules . MAIN body END
+
+    MAIN            shift and go to state 13
+
+
+state 10
+
+    (16) modules -> FUNCTION . modules_prime ID LEFTP modules_second_prime
+    (17) modules_prime -> . type
+    (18) modules_prime -> . NOTYPE
+    (10) type -> . TYPEINT
+    (11) type -> . TYPEFLOAT
+    (12) type -> . TYPECHAR
+
+    NOTYPE          shift and go to state 16
+    TYPEINT         shift and go to state 6
+    TYPEFLOAT       shift and go to state 7
+    TYPECHAR        shift and go to state 8
+
+    modules_prime                  shift and go to state 14
+    type                           shift and go to state 15
+
+state 11
+
+    (2) vars -> type vars_prime . vars_fourth_prime
+    (8) vars_fourth_prime -> . SEPARATOR vars_prime vars_fourth_prime
+    (9) vars_fourth_prime -> . EOS
+
+    SEPARATOR       shift and go to state 18
+    EOS             shift and go to state 19
+
+    vars_fourth_prime              shift and go to state 17
+
+state 12
+
+    (3) vars_prime -> ID . vars_second_prime
+    (4) vars_second_prime -> . LEFTB exp RIGHTB vars_third_prime
+    (5) vars_second_prime -> . EMPTY
+
+    LEFTB           shift and go to state 21
+    EMPTY           shift and go to state 22
+
+    vars_second_prime              shift and go to state 20
+
+state 13
+
+    (1) program -> PRGM ID vars modules MAIN . body END
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 24
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 14
+
+    (16) modules -> FUNCTION modules_prime . ID LEFTP modules_second_prime
+
+    ID              shift and go to state 36
+
+
+state 15
+
+    (17) modules_prime -> type .
+
+    ID              reduce using rule 17 (modules_prime -> type .)
+
+
+state 16
+
+    (18) modules_prime -> NOTYPE .
+
+    ID              reduce using rule 18 (modules_prime -> NOTYPE .)
+
+
+state 17
+
+    (2) vars -> type vars_prime vars_fourth_prime .
+
+    FUNCTION        reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    ID              reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    PRINT           reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    WHILE           reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    FOR             reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    IF              reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+    JEDO            reduce using rule 2 (vars -> type vars_prime vars_fourth_prime .)
+
+
+state 18
+
+    (8) vars_fourth_prime -> SEPARATOR . vars_prime vars_fourth_prime
+    (3) vars_prime -> . ID vars_second_prime
+
+    ID              shift and go to state 12
+
+    vars_prime                     shift and go to state 37
+
+state 19
+
+    (9) vars_fourth_prime -> EOS .
+
+    FUNCTION        reduce using rule 9 (vars_fourth_prime -> EOS .)
+    ID              reduce using rule 9 (vars_fourth_prime -> EOS .)
+    PRINT           reduce using rule 9 (vars_fourth_prime -> EOS .)
+    WHILE           reduce using rule 9 (vars_fourth_prime -> EOS .)
+    FOR             reduce using rule 9 (vars_fourth_prime -> EOS .)
+    IF              reduce using rule 9 (vars_fourth_prime -> EOS .)
+    JEDO            reduce using rule 9 (vars_fourth_prime -> EOS .)
+
+
+state 20
+
+    (3) vars_prime -> ID vars_second_prime .
+
+    SEPARATOR       reduce using rule 3 (vars_prime -> ID vars_second_prime .)
+    EOS             reduce using rule 3 (vars_prime -> ID vars_second_prime .)
+
+
+state 21
+
+    (4) vars_second_prime -> LEFTB . exp RIGHTB vars_third_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 38
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 22
+
+    (5) vars_second_prime -> EMPTY .
+
+    SEPARATOR       reduce using rule 5 (vars_second_prime -> EMPTY .)
+    EOS             reduce using rule 5 (vars_second_prime -> EMPTY .)
+
+
+state 23
+
+    (32) assignment -> ID . assignment_prime EQUALS expression
+    (50) functioncall -> ID . LEFTP exp functioncall_prime
+    (33) assignment_prime -> . EMPTY
+    (34) assignment_prime -> . LEFTB exp RIGHTB assignment_second_prime
+
+    LEFTP           shift and go to state 49
+    EMPTY           shift and go to state 50
+    LEFTB           shift and go to state 51
+
+    assignment_prime               shift and go to state 48
+
+state 24
+
+    (1) program -> PRGM ID vars modules MAIN body . END
+
+    END             shift and go to state 52
+
+
+state 25
+
+    (13) body -> statement . EOS body_prime
+
+    EOS             shift and go to state 53
+
+
+state 26
+
+    (22) statement -> assignment .
+
+    EOS             reduce using rule 22 (statement -> assignment .)
+    ELSEIF          reduce using rule 22 (statement -> assignment .)
+    ELSE            reduce using rule 22 (statement -> assignment .)
+    EMPTY           reduce using rule 22 (statement -> assignment .)
+
+
+state 27
+
+    (23) statement -> print .
+
+    EOS             reduce using rule 23 (statement -> print .)
+    ELSEIF          reduce using rule 23 (statement -> print .)
+    ELSE            reduce using rule 23 (statement -> print .)
+    EMPTY           reduce using rule 23 (statement -> print .)
+
+
+state 28
+
+    (24) statement -> functioncall .
+
+    EOS             reduce using rule 24 (statement -> functioncall .)
+    ELSEIF          reduce using rule 24 (statement -> functioncall .)
+    ELSE            reduce using rule 24 (statement -> functioncall .)
+    EMPTY           reduce using rule 24 (statement -> functioncall .)
+
+
+state 29
+
+    (25) statement -> condition .
+
+    EOS             reduce using rule 25 (statement -> condition .)
+    ELSEIF          reduce using rule 25 (statement -> condition .)
+    ELSE            reduce using rule 25 (statement -> condition .)
+    EMPTY           reduce using rule 25 (statement -> condition .)
+
+
+state 30
+
+    (26) statement -> specialfunction .
+
+    EOS             reduce using rule 26 (statement -> specialfunction .)
+    ELSEIF          reduce using rule 26 (statement -> specialfunction .)
+    ELSE            reduce using rule 26 (statement -> specialfunction .)
+    EMPTY           reduce using rule 26 (statement -> specialfunction .)
+
+
+state 31
+
+    (62) print -> PRINT . LEFTP print_prime
+
+    LEFTP           shift and go to state 54
+
+
+state 32
+
+    (37) condition -> WHILE . LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+
+    LEFTP           shift and go to state 55
+
+
+state 33
+
+    (38) condition -> FOR . LEFTP assignment condition_prime
+
+    LEFTP           shift and go to state 56
+
+
+state 34
+
+    (39) condition -> IF . condition_second_prime
+    (42) condition_second_prime -> . LEFTP compoundexp RIGHTP condition_third_prime
+
+    LEFTP           shift and go to state 58
+
+    condition_second_prime         shift and go to state 57
+
+state 35
+
+    (87) specialfunction -> JEDO . POINT specialfunction_prime
+
+    POINT           shift and go to state 59
+
+
+state 36
+
+    (16) modules -> FUNCTION modules_prime ID . LEFTP modules_second_prime
+
+    LEFTP           shift and go to state 60
+
+
+state 37
+
+    (8) vars_fourth_prime -> SEPARATOR vars_prime . vars_fourth_prime
+    (8) vars_fourth_prime -> . SEPARATOR vars_prime vars_fourth_prime
+    (9) vars_fourth_prime -> . EOS
+
+    SEPARATOR       shift and go to state 18
+    EOS             shift and go to state 19
+
+    vars_fourth_prime              shift and go to state 61
+
+state 38
+
+    (4) vars_second_prime -> LEFTB exp . RIGHTB vars_third_prime
+
+    RIGHTB          shift and go to state 62
+
+
+state 39
+
+    (65) exp -> term . exp_prime
+    (66) exp_prime -> . PLUS term exp_prime
+    (67) exp_prime -> . MINUS term exp_prime
+    (68) exp_prime -> . EMPTY
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 65
+    EMPTY           shift and go to state 66
+
+    exp_prime                      shift and go to state 63
+
+state 40
+
+    (79) term -> factor . term_prime
+    (80) term_prime -> . MULTIPLY factor term_prime
+    (81) term_prime -> . DIVIDE factor term_prime
+    (82) term_prime -> . EMPTY
+
+    MULTIPLY        shift and go to state 68
+    DIVIDE          shift and go to state 69
+    EMPTY           shift and go to state 70
+
+    term_prime                     shift and go to state 67
+
+state 41
+
+    (83) factor -> LEFTP . expression RIGHTP
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    expression                     shift and go to state 71
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 42
+
+    (84) factor -> operand .
+
+    MULTIPLY        reduce using rule 84 (factor -> operand .)
+    DIVIDE          reduce using rule 84 (factor -> operand .)
+    EMPTY           reduce using rule 84 (factor -> operand .)
+
+
+state 43
+
+    (85) factor -> PLUS . operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    operand                        shift and go to state 73
+
+state 44
+
+    (86) factor -> MINUS . operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    operand                        shift and go to state 74
+
+state 45
+
+    (69) operand -> CSTI .
+
+    MULTIPLY        reduce using rule 69 (operand -> CSTI .)
+    DIVIDE          reduce using rule 69 (operand -> CSTI .)
+    EMPTY           reduce using rule 69 (operand -> CSTI .)
+
+
+state 46
+
+    (70) operand -> CSTF .
+
+    MULTIPLY        reduce using rule 70 (operand -> CSTF .)
+    DIVIDE          reduce using rule 70 (operand -> CSTF .)
+    EMPTY           reduce using rule 70 (operand -> CSTF .)
+
+
+state 47
+
+    (71) operand -> ID . operand_prime
+    (72) operand_prime -> . EMPTY
+    (73) operand_prime -> . LEFTB exp RIGHTB operand_second_prime
+    (74) operand_prime -> . LEFTP exp operand_third_prime
+
+    EMPTY           shift and go to state 76
+    LEFTB           shift and go to state 77
+    LEFTP           shift and go to state 78
+
+    operand_prime                  shift and go to state 75
+
+state 48
+
+    (32) assignment -> ID assignment_prime . EQUALS expression
+
+    EQUALS          shift and go to state 79
+
+
+state 49
+
+    (50) functioncall -> ID LEFTP . exp functioncall_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 80
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 50
+
+    (33) assignment_prime -> EMPTY .
+
+    EQUALS          reduce using rule 33 (assignment_prime -> EMPTY .)
+
+
+state 51
+
+    (34) assignment_prime -> LEFTB . exp RIGHTB assignment_second_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 81
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 52
+
+    (1) program -> PRGM ID vars modules MAIN body END .
+
+    $end            reduce using rule 1 (program -> PRGM ID vars modules MAIN body END .)
+
+
+state 53
+
+    (13) body -> statement EOS . body_prime
+    (14) body_prime -> . body
+    (15) body_prime -> . EMPTY
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    EMPTY           shift and go to state 84
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    statement                      shift and go to state 25
+    body_prime                     shift and go to state 82
+    body                           shift and go to state 83
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 54
+
+    (62) print -> PRINT LEFTP . print_prime
+    (63) print_prime -> . STRING RIGHTP
+    (64) print_prime -> . expression RIGHTP
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    STRING          shift and go to state 86
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    print_prime                    shift and go to state 85
+    expression                     shift and go to state 87
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 55
+
+    (37) condition -> WHILE LEFTP . compoundexp RIGHTP LEFTB body RIGHTB
+    (99) compoundexp -> . expression compoundexp_prime
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    compoundexp                    shift and go to state 88
+    expression                     shift and go to state 89
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 56
+
+    (38) condition -> FOR LEFTP . assignment condition_prime
+    (32) assignment -> . ID assignment_prime EQUALS expression
+
+    ID              shift and go to state 91
+
+    assignment                     shift and go to state 90
+
+state 57
+
+    (39) condition -> IF condition_second_prime .
+
+    EOS             reduce using rule 39 (condition -> IF condition_second_prime .)
+    ELSEIF          reduce using rule 39 (condition -> IF condition_second_prime .)
+    ELSE            reduce using rule 39 (condition -> IF condition_second_prime .)
+    EMPTY           reduce using rule 39 (condition -> IF condition_second_prime .)
+
+
+state 58
+
+    (42) condition_second_prime -> LEFTP . compoundexp RIGHTP condition_third_prime
+    (99) compoundexp -> . expression compoundexp_prime
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    compoundexp                    shift and go to state 92
+    expression                     shift and go to state 89
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 59
+
+    (87) specialfunction -> JEDO POINT . specialfunction_prime
+    (88) specialfunction_prime -> . CIRCLE LEFTP exp RIGHTP
+    (89) specialfunction_prime -> . SQUARE LEFTP exp SEPARATOR exp RIGHTP
+    (90) specialfunction_prime -> . RECTANGLE LEFTP exp SEPARATOR exp RIGHTP
+    (91) specialfunction_prime -> . FORWARD LEFTP exp RIGHTP
+    (92) specialfunction_prime -> . BACK LEFTP exp RIGHTP
+    (93) specialfunction_prime -> . TURNRIGHT LEFTP exp RIGHTP
+    (94) specialfunction_prime -> . TURNLEFT LEFTP exp RIGHTP
+    (95) specialfunction_prime -> . COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP
+    (96) specialfunction_prime -> . ARCH LEFTP exp RIGHTP
+    (97) specialfunction_prime -> . LINE LEFTP exp SEPARATOR exp RIGHTP
+    (98) specialfunction_prime -> . THICKNESS LEFTP exp RIGHTP
+
+    CIRCLE          shift and go to state 94
+    SQUARE          shift and go to state 95
+    RECTANGLE       shift and go to state 96
+    FORWARD         shift and go to state 97
+    BACK            shift and go to state 98
+    TURNRIGHT       shift and go to state 99
+    TURNLEFT        shift and go to state 100
+    COLOR           shift and go to state 101
+    ARCH            shift and go to state 102
+    LINE            shift and go to state 103
+    THICKNESS       shift and go to state 104
+
+    specialfunction_prime          shift and go to state 93
+
+state 60
+
+    (16) modules -> FUNCTION modules_prime ID LEFTP . modules_second_prime
+    (19) modules_second_prime -> . type ID modules_third_prime
+    (10) type -> . TYPEINT
+    (11) type -> . TYPEFLOAT
+    (12) type -> . TYPECHAR
+
+    TYPEINT         shift and go to state 6
+    TYPEFLOAT       shift and go to state 7
+    TYPECHAR        shift and go to state 8
+
+    modules_second_prime           shift and go to state 105
+    type                           shift and go to state 106
+
+state 61
+
+    (8) vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .
+
+    FUNCTION        reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    ID              reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    PRINT           reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    WHILE           reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    FOR             reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    IF              reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+    JEDO            reduce using rule 8 (vars_fourth_prime -> SEPARATOR vars_prime vars_fourth_prime .)
+
+
+state 62
+
+    (4) vars_second_prime -> LEFTB exp RIGHTB . vars_third_prime
+    (6) vars_third_prime -> . LEFTB exp RIGHTB
+    (7) vars_third_prime -> . EMPTY
+
+    LEFTB           shift and go to state 107
+    EMPTY           shift and go to state 109
+
+    vars_third_prime               shift and go to state 108
+
+state 63
+
+    (65) exp -> term exp_prime .
+
+    RIGHTB          reduce using rule 65 (exp -> term exp_prime .)
+    GREATER         reduce using rule 65 (exp -> term exp_prime .)
+    LESS            reduce using rule 65 (exp -> term exp_prime .)
+    EQUAL           reduce using rule 65 (exp -> term exp_prime .)
+    NOTEQUAL        reduce using rule 65 (exp -> term exp_prime .)
+    GREATEREQUAL    reduce using rule 65 (exp -> term exp_prime .)
+    LESSEQUAL       reduce using rule 65 (exp -> term exp_prime .)
+    EMPTY           reduce using rule 65 (exp -> term exp_prime .)
+    LEFTP           reduce using rule 65 (exp -> term exp_prime .)
+    PLUS            reduce using rule 65 (exp -> term exp_prime .)
+    MINUS           reduce using rule 65 (exp -> term exp_prime .)
+    CSTI            reduce using rule 65 (exp -> term exp_prime .)
+    CSTF            reduce using rule 65 (exp -> term exp_prime .)
+    ID              reduce using rule 65 (exp -> term exp_prime .)
+    SEPARATOR       reduce using rule 65 (exp -> term exp_prime .)
+    RIGHTP          reduce using rule 65 (exp -> term exp_prime .)
+
+
+state 64
+
+    (66) exp_prime -> PLUS . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    term                           shift and go to state 110
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 65
+
+    (67) exp_prime -> MINUS . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    term                           shift and go to state 111
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 66
+
+    (68) exp_prime -> EMPTY .
+
+    RIGHTB          reduce using rule 68 (exp_prime -> EMPTY .)
+    GREATER         reduce using rule 68 (exp_prime -> EMPTY .)
+    LESS            reduce using rule 68 (exp_prime -> EMPTY .)
+    EQUAL           reduce using rule 68 (exp_prime -> EMPTY .)
+    NOTEQUAL        reduce using rule 68 (exp_prime -> EMPTY .)
+    GREATEREQUAL    reduce using rule 68 (exp_prime -> EMPTY .)
+    LESSEQUAL       reduce using rule 68 (exp_prime -> EMPTY .)
+    EMPTY           reduce using rule 68 (exp_prime -> EMPTY .)
+    LEFTP           reduce using rule 68 (exp_prime -> EMPTY .)
+    PLUS            reduce using rule 68 (exp_prime -> EMPTY .)
+    MINUS           reduce using rule 68 (exp_prime -> EMPTY .)
+    CSTI            reduce using rule 68 (exp_prime -> EMPTY .)
+    CSTF            reduce using rule 68 (exp_prime -> EMPTY .)
+    ID              reduce using rule 68 (exp_prime -> EMPTY .)
+    SEPARATOR       reduce using rule 68 (exp_prime -> EMPTY .)
+    RIGHTP          reduce using rule 68 (exp_prime -> EMPTY .)
+
+
+state 67
+
+    (79) term -> factor term_prime .
+
+    PLUS            reduce using rule 79 (term -> factor term_prime .)
+    MINUS           reduce using rule 79 (term -> factor term_prime .)
+    EMPTY           reduce using rule 79 (term -> factor term_prime .)
+
+
+state 68
+
+    (80) term_prime -> MULTIPLY . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    factor                         shift and go to state 112
+    operand                        shift and go to state 42
+
+state 69
+
+    (81) term_prime -> DIVIDE . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    factor                         shift and go to state 113
+    operand                        shift and go to state 42
+
+state 70
+
+    (82) term_prime -> EMPTY .
+
+    PLUS            reduce using rule 82 (term_prime -> EMPTY .)
+    MINUS           reduce using rule 82 (term_prime -> EMPTY .)
+    EMPTY           reduce using rule 82 (term_prime -> EMPTY .)
+
+
+state 71
+
+    (83) factor -> LEFTP expression . RIGHTP
+
+    RIGHTP          shift and go to state 114
+
+
+state 72
+
+    (53) expression -> exp . expression_prime
+    (54) expression_prime -> . exp expression_prime
+    (55) expression_prime -> . GREATER
+    (56) expression_prime -> . LESS
+    (57) expression_prime -> . EQUAL
+    (58) expression_prime -> . NOTEQUAL
+    (59) expression_prime -> . GREATEREQUAL
+    (60) expression_prime -> . LESSEQUAL
+    (61) expression_prime -> . EMPTY
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    GREATER         shift and go to state 117
+    LESS            shift and go to state 118
+    EQUAL           shift and go to state 119
+    NOTEQUAL        shift and go to state 120
+    GREATEREQUAL    shift and go to state 121
+    LESSEQUAL       shift and go to state 122
+    EMPTY           shift and go to state 123
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 115
+    expression_prime               shift and go to state 116
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 73
+
+    (85) factor -> PLUS operand .
+
+    MULTIPLY        reduce using rule 85 (factor -> PLUS operand .)
+    DIVIDE          reduce using rule 85 (factor -> PLUS operand .)
+    EMPTY           reduce using rule 85 (factor -> PLUS operand .)
+
+
+state 74
+
+    (86) factor -> MINUS operand .
+
+    MULTIPLY        reduce using rule 86 (factor -> MINUS operand .)
+    DIVIDE          reduce using rule 86 (factor -> MINUS operand .)
+    EMPTY           reduce using rule 86 (factor -> MINUS operand .)
+
+
+state 75
+
+    (71) operand -> ID operand_prime .
+
+    MULTIPLY        reduce using rule 71 (operand -> ID operand_prime .)
+    DIVIDE          reduce using rule 71 (operand -> ID operand_prime .)
+    EMPTY           reduce using rule 71 (operand -> ID operand_prime .)
+
+
+state 76
+
+    (72) operand_prime -> EMPTY .
+
+    MULTIPLY        reduce using rule 72 (operand_prime -> EMPTY .)
+    DIVIDE          reduce using rule 72 (operand_prime -> EMPTY .)
+    EMPTY           reduce using rule 72 (operand_prime -> EMPTY .)
+
+
+state 77
+
+    (73) operand_prime -> LEFTB . exp RIGHTB operand_second_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 124
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 78
+
+    (74) operand_prime -> LEFTP . exp operand_third_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 125
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 79
+
+    (32) assignment -> ID assignment_prime EQUALS . expression
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    expression                     shift and go to state 126
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 80
+
+    (50) functioncall -> ID LEFTP exp . functioncall_prime
+    (51) functioncall_prime -> . SEPARATOR exp functioncall_prime
+    (52) functioncall_prime -> . RIGHTP
+
+    SEPARATOR       shift and go to state 128
+    RIGHTP          shift and go to state 129
+
+    functioncall_prime             shift and go to state 127
+
+state 81
+
+    (34) assignment_prime -> LEFTB exp . RIGHTB assignment_second_prime
+
+    RIGHTB          shift and go to state 130
+
+
+state 82
+
+    (13) body -> statement EOS body_prime .
+
+    END             reduce using rule 13 (body -> statement EOS body_prime .)
+    RIGHTB          reduce using rule 13 (body -> statement EOS body_prime .)
+    RIGHTP          reduce using rule 13 (body -> statement EOS body_prime .)
+
+
+state 83
+
+    (14) body_prime -> body .
+
+    END             reduce using rule 14 (body_prime -> body .)
+    RIGHTB          reduce using rule 14 (body_prime -> body .)
+    RIGHTP          reduce using rule 14 (body_prime -> body .)
+
+
+state 84
+
+    (15) body_prime -> EMPTY .
+
+    END             reduce using rule 15 (body_prime -> EMPTY .)
+    RIGHTB          reduce using rule 15 (body_prime -> EMPTY .)
+    RIGHTP          reduce using rule 15 (body_prime -> EMPTY .)
+
+
+state 85
+
+    (62) print -> PRINT LEFTP print_prime .
+
+    EOS             reduce using rule 62 (print -> PRINT LEFTP print_prime .)
+    ELSEIF          reduce using rule 62 (print -> PRINT LEFTP print_prime .)
+    ELSE            reduce using rule 62 (print -> PRINT LEFTP print_prime .)
+    EMPTY           reduce using rule 62 (print -> PRINT LEFTP print_prime .)
+
+
+state 86
+
+    (63) print_prime -> STRING . RIGHTP
+
+    RIGHTP          shift and go to state 131
+
+
+state 87
+
+    (64) print_prime -> expression . RIGHTP
+
+    RIGHTP          shift and go to state 132
+
+
+state 88
+
+    (37) condition -> WHILE LEFTP compoundexp . RIGHTP LEFTB body RIGHTB
+
+    RIGHTP          shift and go to state 133
+
+
+state 89
+
+    (99) compoundexp -> expression . compoundexp_prime
+    (100) compoundexp_prime -> . AND compoundexp
+    (101) compoundexp_prime -> . OR compoundexp
+    (102) compoundexp_prime -> . EMPTY
+
+    AND             shift and go to state 135
+    OR              shift and go to state 136
+    EMPTY           shift and go to state 137
+
+    compoundexp_prime              shift and go to state 134
+
+state 90
+
+    (38) condition -> FOR LEFTP assignment . condition_prime
+    (40) condition_prime -> . SEPARATOR assignment condition_prime
+    (41) condition_prime -> . EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB
+
+    SEPARATOR       shift and go to state 139
+    EOS             shift and go to state 140
+
+    condition_prime                shift and go to state 138
+
+state 91
+
+    (32) assignment -> ID . assignment_prime EQUALS expression
+    (33) assignment_prime -> . EMPTY
+    (34) assignment_prime -> . LEFTB exp RIGHTB assignment_second_prime
+
+    EMPTY           shift and go to state 50
+    LEFTB           shift and go to state 51
+
+    assignment_prime               shift and go to state 48
+
+state 92
+
+    (42) condition_second_prime -> LEFTP compoundexp . RIGHTP condition_third_prime
+
+    RIGHTP          shift and go to state 141
+
+
+state 93
+
+    (87) specialfunction -> JEDO POINT specialfunction_prime .
+
+    EOS             reduce using rule 87 (specialfunction -> JEDO POINT specialfunction_prime .)
+    ELSEIF          reduce using rule 87 (specialfunction -> JEDO POINT specialfunction_prime .)
+    ELSE            reduce using rule 87 (specialfunction -> JEDO POINT specialfunction_prime .)
+    EMPTY           reduce using rule 87 (specialfunction -> JEDO POINT specialfunction_prime .)
+
+
+state 94
+
+    (88) specialfunction_prime -> CIRCLE . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 142
+
+
+state 95
+
+    (89) specialfunction_prime -> SQUARE . LEFTP exp SEPARATOR exp RIGHTP
+
+    LEFTP           shift and go to state 143
+
+
+state 96
+
+    (90) specialfunction_prime -> RECTANGLE . LEFTP exp SEPARATOR exp RIGHTP
+
+    LEFTP           shift and go to state 144
+
+
+state 97
+
+    (91) specialfunction_prime -> FORWARD . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 145
+
+
+state 98
+
+    (92) specialfunction_prime -> BACK . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 146
+
+
+state 99
+
+    (93) specialfunction_prime -> TURNRIGHT . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 147
+
+
+state 100
+
+    (94) specialfunction_prime -> TURNLEFT . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 148
+
+
+state 101
+
+    (95) specialfunction_prime -> COLOR . LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP
+
+    LEFTP           shift and go to state 149
+
+
+state 102
+
+    (96) specialfunction_prime -> ARCH . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 150
+
+
+state 103
+
+    (97) specialfunction_prime -> LINE . LEFTP exp SEPARATOR exp RIGHTP
+
+    LEFTP           shift and go to state 151
+
+
+state 104
+
+    (98) specialfunction_prime -> THICKNESS . LEFTP exp RIGHTP
+
+    LEFTP           shift and go to state 152
+
+
+state 105
+
+    (16) modules -> FUNCTION modules_prime ID LEFTP modules_second_prime .
+
+    MAIN            reduce using rule 16 (modules -> FUNCTION modules_prime ID LEFTP modules_second_prime .)
+
+
+state 106
+
+    (19) modules_second_prime -> type . ID modules_third_prime
+
+    ID              shift and go to state 153
+
+
+state 107
+
+    (6) vars_third_prime -> LEFTB . exp RIGHTB
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 154
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 108
+
+    (4) vars_second_prime -> LEFTB exp RIGHTB vars_third_prime .
+
+    SEPARATOR       reduce using rule 4 (vars_second_prime -> LEFTB exp RIGHTB vars_third_prime .)
+    EOS             reduce using rule 4 (vars_second_prime -> LEFTB exp RIGHTB vars_third_prime .)
+
+
+state 109
+
+    (7) vars_third_prime -> EMPTY .
+
+    SEPARATOR       reduce using rule 7 (vars_third_prime -> EMPTY .)
+    EOS             reduce using rule 7 (vars_third_prime -> EMPTY .)
+
+
+state 110
+
+    (66) exp_prime -> PLUS term . exp_prime
+    (66) exp_prime -> . PLUS term exp_prime
+    (67) exp_prime -> . MINUS term exp_prime
+    (68) exp_prime -> . EMPTY
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 65
+    EMPTY           shift and go to state 66
+
+    exp_prime                      shift and go to state 155
+
+state 111
+
+    (67) exp_prime -> MINUS term . exp_prime
+    (66) exp_prime -> . PLUS term exp_prime
+    (67) exp_prime -> . MINUS term exp_prime
+    (68) exp_prime -> . EMPTY
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 65
+    EMPTY           shift and go to state 66
+
+    exp_prime                      shift and go to state 156
+
+state 112
+
+    (80) term_prime -> MULTIPLY factor . term_prime
+    (80) term_prime -> . MULTIPLY factor term_prime
+    (81) term_prime -> . DIVIDE factor term_prime
+    (82) term_prime -> . EMPTY
+
+    MULTIPLY        shift and go to state 68
+    DIVIDE          shift and go to state 69
+    EMPTY           shift and go to state 70
+
+    term_prime                     shift and go to state 157
+
+state 113
+
+    (81) term_prime -> DIVIDE factor . term_prime
+    (80) term_prime -> . MULTIPLY factor term_prime
+    (81) term_prime -> . DIVIDE factor term_prime
+    (82) term_prime -> . EMPTY
+
+    MULTIPLY        shift and go to state 68
+    DIVIDE          shift and go to state 69
+    EMPTY           shift and go to state 70
+
+    term_prime                     shift and go to state 158
+
+state 114
+
+    (83) factor -> LEFTP expression RIGHTP .
+
+    MULTIPLY        reduce using rule 83 (factor -> LEFTP expression RIGHTP .)
+    DIVIDE          reduce using rule 83 (factor -> LEFTP expression RIGHTP .)
+    EMPTY           reduce using rule 83 (factor -> LEFTP expression RIGHTP .)
+
+
+state 115
+
+    (54) expression_prime -> exp . expression_prime
+    (54) expression_prime -> . exp expression_prime
+    (55) expression_prime -> . GREATER
+    (56) expression_prime -> . LESS
+    (57) expression_prime -> . EQUAL
+    (58) expression_prime -> . NOTEQUAL
+    (59) expression_prime -> . GREATEREQUAL
+    (60) expression_prime -> . LESSEQUAL
+    (61) expression_prime -> . EMPTY
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    GREATER         shift and go to state 117
+    LESS            shift and go to state 118
+    EQUAL           shift and go to state 119
+    NOTEQUAL        shift and go to state 120
+    GREATEREQUAL    shift and go to state 121
+    LESSEQUAL       shift and go to state 122
+    EMPTY           shift and go to state 123
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 115
+    expression_prime               shift and go to state 159
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 116
+
+    (53) expression -> exp expression_prime .
+
+    RIGHTP          reduce using rule 53 (expression -> exp expression_prime .)
+    AND             reduce using rule 53 (expression -> exp expression_prime .)
+    OR              reduce using rule 53 (expression -> exp expression_prime .)
+    EMPTY           reduce using rule 53 (expression -> exp expression_prime .)
+    EOS             reduce using rule 53 (expression -> exp expression_prime .)
+    SEPARATOR       reduce using rule 53 (expression -> exp expression_prime .)
+    ELSEIF          reduce using rule 53 (expression -> exp expression_prime .)
+    ELSE            reduce using rule 53 (expression -> exp expression_prime .)
+
+
+state 117
+
+    (55) expression_prime -> GREATER .
+
+    RIGHTP          reduce using rule 55 (expression_prime -> GREATER .)
+    AND             reduce using rule 55 (expression_prime -> GREATER .)
+    OR              reduce using rule 55 (expression_prime -> GREATER .)
+    EMPTY           reduce using rule 55 (expression_prime -> GREATER .)
+    EOS             reduce using rule 55 (expression_prime -> GREATER .)
+    SEPARATOR       reduce using rule 55 (expression_prime -> GREATER .)
+    ELSEIF          reduce using rule 55 (expression_prime -> GREATER .)
+    ELSE            reduce using rule 55 (expression_prime -> GREATER .)
+
+
+state 118
+
+    (56) expression_prime -> LESS .
+
+    RIGHTP          reduce using rule 56 (expression_prime -> LESS .)
+    AND             reduce using rule 56 (expression_prime -> LESS .)
+    OR              reduce using rule 56 (expression_prime -> LESS .)
+    EMPTY           reduce using rule 56 (expression_prime -> LESS .)
+    EOS             reduce using rule 56 (expression_prime -> LESS .)
+    SEPARATOR       reduce using rule 56 (expression_prime -> LESS .)
+    ELSEIF          reduce using rule 56 (expression_prime -> LESS .)
+    ELSE            reduce using rule 56 (expression_prime -> LESS .)
+
+
+state 119
+
+    (57) expression_prime -> EQUAL .
+
+    RIGHTP          reduce using rule 57 (expression_prime -> EQUAL .)
+    AND             reduce using rule 57 (expression_prime -> EQUAL .)
+    OR              reduce using rule 57 (expression_prime -> EQUAL .)
+    EMPTY           reduce using rule 57 (expression_prime -> EQUAL .)
+    EOS             reduce using rule 57 (expression_prime -> EQUAL .)
+    SEPARATOR       reduce using rule 57 (expression_prime -> EQUAL .)
+    ELSEIF          reduce using rule 57 (expression_prime -> EQUAL .)
+    ELSE            reduce using rule 57 (expression_prime -> EQUAL .)
+
+
+state 120
+
+    (58) expression_prime -> NOTEQUAL .
+
+    RIGHTP          reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    AND             reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    OR              reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    EMPTY           reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    EOS             reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    SEPARATOR       reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    ELSEIF          reduce using rule 58 (expression_prime -> NOTEQUAL .)
+    ELSE            reduce using rule 58 (expression_prime -> NOTEQUAL .)
+
+
+state 121
+
+    (59) expression_prime -> GREATEREQUAL .
+
+    RIGHTP          reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    AND             reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    OR              reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    EMPTY           reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    EOS             reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    SEPARATOR       reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    ELSEIF          reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+    ELSE            reduce using rule 59 (expression_prime -> GREATEREQUAL .)
+
+
+state 122
+
+    (60) expression_prime -> LESSEQUAL .
+
+    RIGHTP          reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    AND             reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    OR              reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    EMPTY           reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    EOS             reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    SEPARATOR       reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    ELSEIF          reduce using rule 60 (expression_prime -> LESSEQUAL .)
+    ELSE            reduce using rule 60 (expression_prime -> LESSEQUAL .)
+
+
+state 123
+
+    (61) expression_prime -> EMPTY .
+
+    RIGHTP          reduce using rule 61 (expression_prime -> EMPTY .)
+    AND             reduce using rule 61 (expression_prime -> EMPTY .)
+    OR              reduce using rule 61 (expression_prime -> EMPTY .)
+    EMPTY           reduce using rule 61 (expression_prime -> EMPTY .)
+    EOS             reduce using rule 61 (expression_prime -> EMPTY .)
+    SEPARATOR       reduce using rule 61 (expression_prime -> EMPTY .)
+    ELSEIF          reduce using rule 61 (expression_prime -> EMPTY .)
+    ELSE            reduce using rule 61 (expression_prime -> EMPTY .)
+
+
+state 124
+
+    (73) operand_prime -> LEFTB exp . RIGHTB operand_second_prime
+
+    RIGHTB          shift and go to state 160
+
+
+state 125
+
+    (74) operand_prime -> LEFTP exp . operand_third_prime
+    (77) operand_third_prime -> . SEPARATOR exp operand_third_prime
+    (78) operand_third_prime -> . RIGHTP
+
+    SEPARATOR       shift and go to state 162
+    RIGHTP          shift and go to state 163
+
+    operand_third_prime            shift and go to state 161
+
+state 126
+
+    (32) assignment -> ID assignment_prime EQUALS expression .
+
+    EOS             reduce using rule 32 (assignment -> ID assignment_prime EQUALS expression .)
+    SEPARATOR       reduce using rule 32 (assignment -> ID assignment_prime EQUALS expression .)
+    ELSEIF          reduce using rule 32 (assignment -> ID assignment_prime EQUALS expression .)
+    ELSE            reduce using rule 32 (assignment -> ID assignment_prime EQUALS expression .)
+    EMPTY           reduce using rule 32 (assignment -> ID assignment_prime EQUALS expression .)
+
+
+state 127
+
+    (50) functioncall -> ID LEFTP exp functioncall_prime .
+
+    EOS             reduce using rule 50 (functioncall -> ID LEFTP exp functioncall_prime .)
+    ELSEIF          reduce using rule 50 (functioncall -> ID LEFTP exp functioncall_prime .)
+    ELSE            reduce using rule 50 (functioncall -> ID LEFTP exp functioncall_prime .)
+    EMPTY           reduce using rule 50 (functioncall -> ID LEFTP exp functioncall_prime .)
+
+
+state 128
+
+    (51) functioncall_prime -> SEPARATOR . exp functioncall_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 164
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 129
+
+    (52) functioncall_prime -> RIGHTP .
+
+    EOS             reduce using rule 52 (functioncall_prime -> RIGHTP .)
+    ELSEIF          reduce using rule 52 (functioncall_prime -> RIGHTP .)
+    ELSE            reduce using rule 52 (functioncall_prime -> RIGHTP .)
+    EMPTY           reduce using rule 52 (functioncall_prime -> RIGHTP .)
+
+
+state 130
+
+    (34) assignment_prime -> LEFTB exp RIGHTB . assignment_second_prime
+    (35) assignment_second_prime -> . EMPTY
+    (36) assignment_second_prime -> . LEFTB exp RIGHTB
+
+    EMPTY           shift and go to state 167
+    LEFTB           shift and go to state 165
+
+    assignment_second_prime        shift and go to state 166
+
+state 131
+
+    (63) print_prime -> STRING RIGHTP .
+
+    EOS             reduce using rule 63 (print_prime -> STRING RIGHTP .)
+    ELSEIF          reduce using rule 63 (print_prime -> STRING RIGHTP .)
+    ELSE            reduce using rule 63 (print_prime -> STRING RIGHTP .)
+    EMPTY           reduce using rule 63 (print_prime -> STRING RIGHTP .)
+
+
+state 132
+
+    (64) print_prime -> expression RIGHTP .
+
+    EOS             reduce using rule 64 (print_prime -> expression RIGHTP .)
+    ELSEIF          reduce using rule 64 (print_prime -> expression RIGHTP .)
+    ELSE            reduce using rule 64 (print_prime -> expression RIGHTP .)
+    EMPTY           reduce using rule 64 (print_prime -> expression RIGHTP .)
+
+
+state 133
+
+    (37) condition -> WHILE LEFTP compoundexp RIGHTP . LEFTB body RIGHTB
+
+    LEFTB           shift and go to state 168
+
+
+state 134
+
+    (99) compoundexp -> expression compoundexp_prime .
+
+    RIGHTP          reduce using rule 99 (compoundexp -> expression compoundexp_prime .)
+    EOS             reduce using rule 99 (compoundexp -> expression compoundexp_prime .)
+
+
+state 135
+
+    (100) compoundexp_prime -> AND . compoundexp
+    (99) compoundexp -> . expression compoundexp_prime
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    compoundexp                    shift and go to state 169
+    expression                     shift and go to state 89
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 136
+
+    (101) compoundexp_prime -> OR . compoundexp
+    (99) compoundexp -> . expression compoundexp_prime
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    compoundexp                    shift and go to state 170
+    expression                     shift and go to state 89
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 137
+
+    (102) compoundexp_prime -> EMPTY .
+
+    RIGHTP          reduce using rule 102 (compoundexp_prime -> EMPTY .)
+    EOS             reduce using rule 102 (compoundexp_prime -> EMPTY .)
+
+
+state 138
+
+    (38) condition -> FOR LEFTP assignment condition_prime .
+
+    EOS             reduce using rule 38 (condition -> FOR LEFTP assignment condition_prime .)
+    ELSEIF          reduce using rule 38 (condition -> FOR LEFTP assignment condition_prime .)
+    ELSE            reduce using rule 38 (condition -> FOR LEFTP assignment condition_prime .)
+    EMPTY           reduce using rule 38 (condition -> FOR LEFTP assignment condition_prime .)
+
+
+state 139
+
+    (40) condition_prime -> SEPARATOR . assignment condition_prime
+    (32) assignment -> . ID assignment_prime EQUALS expression
+
+    ID              shift and go to state 91
+
+    assignment                     shift and go to state 171
+
+state 140
+
+    (41) condition_prime -> EOS . compoundexp EOS increment RIGHTP LEFTB body RIGHTB
+    (99) compoundexp -> . expression compoundexp_prime
+    (53) expression -> . exp expression_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    compoundexp                    shift and go to state 172
+    expression                     shift and go to state 89
+    exp                            shift and go to state 72
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 141
+
+    (42) condition_second_prime -> LEFTP compoundexp RIGHTP . condition_third_prime
+    (43) condition_third_prime -> . statement condition_fourth_prime
+    (44) condition_third_prime -> . LEFTB body RIGHTB condition_fourth_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    LEFTB           shift and go to state 175
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    condition_third_prime          shift and go to state 173
+    statement                      shift and go to state 174
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 142
+
+    (88) specialfunction_prime -> CIRCLE LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 176
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 143
+
+    (89) specialfunction_prime -> SQUARE LEFTP . exp SEPARATOR exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 177
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 144
+
+    (90) specialfunction_prime -> RECTANGLE LEFTP . exp SEPARATOR exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 178
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 145
+
+    (91) specialfunction_prime -> FORWARD LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 179
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 146
+
+    (92) specialfunction_prime -> BACK LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 180
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 147
+
+    (93) specialfunction_prime -> TURNRIGHT LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 181
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 148
+
+    (94) specialfunction_prime -> TURNLEFT LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 182
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 149
+
+    (95) specialfunction_prime -> COLOR LEFTP . exp SEPARATOR exp SEPARATOR exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 183
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 150
+
+    (96) specialfunction_prime -> ARCH LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 184
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 151
+
+    (97) specialfunction_prime -> LINE LEFTP . exp SEPARATOR exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 185
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 152
+
+    (98) specialfunction_prime -> THICKNESS LEFTP . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 186
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 153
+
+    (19) modules_second_prime -> type ID . modules_third_prime
+    (20) modules_third_prime -> . SEPARATOR modules_second_prime
+    (21) modules_third_prime -> . RIGHTP LEFTP vars body RIGHTP
+
+    SEPARATOR       shift and go to state 188
+    RIGHTP          shift and go to state 189
+
+    modules_third_prime            shift and go to state 187
+
+state 154
+
+    (6) vars_third_prime -> LEFTB exp . RIGHTB
+
+    RIGHTB          shift and go to state 190
+
+
+state 155
+
+    (66) exp_prime -> PLUS term exp_prime .
+
+    RIGHTB          reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    GREATER         reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    LESS            reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    EQUAL           reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    NOTEQUAL        reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    GREATEREQUAL    reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    LESSEQUAL       reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    EMPTY           reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    LEFTP           reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    PLUS            reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    MINUS           reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    CSTI            reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    CSTF            reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    ID              reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    SEPARATOR       reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+    RIGHTP          reduce using rule 66 (exp_prime -> PLUS term exp_prime .)
+
+
+state 156
+
+    (67) exp_prime -> MINUS term exp_prime .
+
+    RIGHTB          reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    GREATER         reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    LESS            reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    EQUAL           reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    NOTEQUAL        reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    GREATEREQUAL    reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    LESSEQUAL       reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    EMPTY           reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    LEFTP           reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    PLUS            reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    MINUS           reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    CSTI            reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    CSTF            reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    ID              reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    SEPARATOR       reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+    RIGHTP          reduce using rule 67 (exp_prime -> MINUS term exp_prime .)
+
+
+state 157
+
+    (80) term_prime -> MULTIPLY factor term_prime .
+
+    PLUS            reduce using rule 80 (term_prime -> MULTIPLY factor term_prime .)
+    MINUS           reduce using rule 80 (term_prime -> MULTIPLY factor term_prime .)
+    EMPTY           reduce using rule 80 (term_prime -> MULTIPLY factor term_prime .)
+
+
+state 158
+
+    (81) term_prime -> DIVIDE factor term_prime .
+
+    PLUS            reduce using rule 81 (term_prime -> DIVIDE factor term_prime .)
+    MINUS           reduce using rule 81 (term_prime -> DIVIDE factor term_prime .)
+    EMPTY           reduce using rule 81 (term_prime -> DIVIDE factor term_prime .)
+
+
+state 159
+
+    (54) expression_prime -> exp expression_prime .
+
+    RIGHTP          reduce using rule 54 (expression_prime -> exp expression_prime .)
+    AND             reduce using rule 54 (expression_prime -> exp expression_prime .)
+    OR              reduce using rule 54 (expression_prime -> exp expression_prime .)
+    EMPTY           reduce using rule 54 (expression_prime -> exp expression_prime .)
+    EOS             reduce using rule 54 (expression_prime -> exp expression_prime .)
+    SEPARATOR       reduce using rule 54 (expression_prime -> exp expression_prime .)
+    ELSEIF          reduce using rule 54 (expression_prime -> exp expression_prime .)
+    ELSE            reduce using rule 54 (expression_prime -> exp expression_prime .)
+
+
+state 160
+
+    (73) operand_prime -> LEFTB exp RIGHTB . operand_second_prime
+    (75) operand_second_prime -> . EMPTY
+    (76) operand_second_prime -> . LEFTB exp RIGHTB
+
+    EMPTY           shift and go to state 193
+    LEFTB           shift and go to state 191
+
+    operand_second_prime           shift and go to state 192
+
+state 161
+
+    (74) operand_prime -> LEFTP exp operand_third_prime .
+
+    MULTIPLY        reduce using rule 74 (operand_prime -> LEFTP exp operand_third_prime .)
+    DIVIDE          reduce using rule 74 (operand_prime -> LEFTP exp operand_third_prime .)
+    EMPTY           reduce using rule 74 (operand_prime -> LEFTP exp operand_third_prime .)
+
+
+state 162
+
+    (77) operand_third_prime -> SEPARATOR . exp operand_third_prime
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 194
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 163
+
+    (78) operand_third_prime -> RIGHTP .
+
+    MULTIPLY        reduce using rule 78 (operand_third_prime -> RIGHTP .)
+    DIVIDE          reduce using rule 78 (operand_third_prime -> RIGHTP .)
+    EMPTY           reduce using rule 78 (operand_third_prime -> RIGHTP .)
+
+
+state 164
+
+    (51) functioncall_prime -> SEPARATOR exp . functioncall_prime
+    (51) functioncall_prime -> . SEPARATOR exp functioncall_prime
+    (52) functioncall_prime -> . RIGHTP
+
+    SEPARATOR       shift and go to state 128
+    RIGHTP          shift and go to state 129
+
+    functioncall_prime             shift and go to state 195
+
+state 165
+
+    (36) assignment_second_prime -> LEFTB . exp RIGHTB
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 196
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 166
+
+    (34) assignment_prime -> LEFTB exp RIGHTB assignment_second_prime .
+
+    EQUALS          reduce using rule 34 (assignment_prime -> LEFTB exp RIGHTB assignment_second_prime .)
+
+
+state 167
+
+    (35) assignment_second_prime -> EMPTY .
+
+    EQUALS          reduce using rule 35 (assignment_second_prime -> EMPTY .)
+
+
+state 168
+
+    (37) condition -> WHILE LEFTP compoundexp RIGHTP LEFTB . body RIGHTB
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 197
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 169
+
+    (100) compoundexp_prime -> AND compoundexp .
+
+    RIGHTP          reduce using rule 100 (compoundexp_prime -> AND compoundexp .)
+    EOS             reduce using rule 100 (compoundexp_prime -> AND compoundexp .)
+
+
+state 170
+
+    (101) compoundexp_prime -> OR compoundexp .
+
+    RIGHTP          reduce using rule 101 (compoundexp_prime -> OR compoundexp .)
+    EOS             reduce using rule 101 (compoundexp_prime -> OR compoundexp .)
+
+
+state 171
+
+    (40) condition_prime -> SEPARATOR assignment . condition_prime
+    (40) condition_prime -> . SEPARATOR assignment condition_prime
+    (41) condition_prime -> . EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB
+
+    SEPARATOR       shift and go to state 139
+    EOS             shift and go to state 140
+
+    condition_prime                shift and go to state 198
+
+state 172
+
+    (41) condition_prime -> EOS compoundexp . EOS increment RIGHTP LEFTB body RIGHTB
+
+    EOS             shift and go to state 199
+
+
+state 173
+
+    (42) condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime .
+
+    EOS             reduce using rule 42 (condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime .)
+    ELSEIF          reduce using rule 42 (condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime .)
+    ELSE            reduce using rule 42 (condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime .)
+    EMPTY           reduce using rule 42 (condition_second_prime -> LEFTP compoundexp RIGHTP condition_third_prime .)
+
+
+state 174
+
+    (43) condition_third_prime -> statement . condition_fourth_prime
+    (45) condition_fourth_prime -> . ELSEIF condition_second_prime
+    (46) condition_fourth_prime -> . ELSE condition_fifth_prime
+    (47) condition_fourth_prime -> . EMPTY
+
+    ELSEIF          shift and go to state 201
+    ELSE            shift and go to state 202
+    EMPTY           shift and go to state 203
+
+    condition_fourth_prime         shift and go to state 200
+
+state 175
+
+    (44) condition_third_prime -> LEFTB . body RIGHTB condition_fourth_prime
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 204
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 176
+
+    (88) specialfunction_prime -> CIRCLE LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 205
+
+
+state 177
+
+    (89) specialfunction_prime -> SQUARE LEFTP exp . SEPARATOR exp RIGHTP
+
+    SEPARATOR       shift and go to state 206
+
+
+state 178
+
+    (90) specialfunction_prime -> RECTANGLE LEFTP exp . SEPARATOR exp RIGHTP
+
+    SEPARATOR       shift and go to state 207
+
+
+state 179
+
+    (91) specialfunction_prime -> FORWARD LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 208
+
+
+state 180
+
+    (92) specialfunction_prime -> BACK LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 209
+
+
+state 181
+
+    (93) specialfunction_prime -> TURNRIGHT LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 210
+
+
+state 182
+
+    (94) specialfunction_prime -> TURNLEFT LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 211
+
+
+state 183
+
+    (95) specialfunction_prime -> COLOR LEFTP exp . SEPARATOR exp SEPARATOR exp RIGHTP
+
+    SEPARATOR       shift and go to state 212
+
+
+state 184
+
+    (96) specialfunction_prime -> ARCH LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 213
+
+
+state 185
+
+    (97) specialfunction_prime -> LINE LEFTP exp . SEPARATOR exp RIGHTP
+
+    SEPARATOR       shift and go to state 214
+
+
+state 186
+
+    (98) specialfunction_prime -> THICKNESS LEFTP exp . RIGHTP
+
+    RIGHTP          shift and go to state 215
+
+
+state 187
+
+    (19) modules_second_prime -> type ID modules_third_prime .
+
+    MAIN            reduce using rule 19 (modules_second_prime -> type ID modules_third_prime .)
+
+
+state 188
+
+    (20) modules_third_prime -> SEPARATOR . modules_second_prime
+    (19) modules_second_prime -> . type ID modules_third_prime
+    (10) type -> . TYPEINT
+    (11) type -> . TYPEFLOAT
+    (12) type -> . TYPECHAR
+
+    TYPEINT         shift and go to state 6
+    TYPEFLOAT       shift and go to state 7
+    TYPECHAR        shift and go to state 8
+
+    modules_second_prime           shift and go to state 216
+    type                           shift and go to state 106
+
+state 189
+
+    (21) modules_third_prime -> RIGHTP . LEFTP vars body RIGHTP
+
+    LEFTP           shift and go to state 217
+
+
+state 190
+
+    (6) vars_third_prime -> LEFTB exp RIGHTB .
+
+    SEPARATOR       reduce using rule 6 (vars_third_prime -> LEFTB exp RIGHTB .)
+    EOS             reduce using rule 6 (vars_third_prime -> LEFTB exp RIGHTB .)
+
+
+state 191
+
+    (76) operand_second_prime -> LEFTB . exp RIGHTB
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 218
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 192
+
+    (73) operand_prime -> LEFTB exp RIGHTB operand_second_prime .
+
+    MULTIPLY        reduce using rule 73 (operand_prime -> LEFTB exp RIGHTB operand_second_prime .)
+    DIVIDE          reduce using rule 73 (operand_prime -> LEFTB exp RIGHTB operand_second_prime .)
+    EMPTY           reduce using rule 73 (operand_prime -> LEFTB exp RIGHTB operand_second_prime .)
+
+
+state 193
+
+    (75) operand_second_prime -> EMPTY .
+
+    MULTIPLY        reduce using rule 75 (operand_second_prime -> EMPTY .)
+    DIVIDE          reduce using rule 75 (operand_second_prime -> EMPTY .)
+    EMPTY           reduce using rule 75 (operand_second_prime -> EMPTY .)
+
+
+state 194
+
+    (77) operand_third_prime -> SEPARATOR exp . operand_third_prime
+    (77) operand_third_prime -> . SEPARATOR exp operand_third_prime
+    (78) operand_third_prime -> . RIGHTP
+
+    SEPARATOR       shift and go to state 162
+    RIGHTP          shift and go to state 163
+
+    operand_third_prime            shift and go to state 219
+
+state 195
+
+    (51) functioncall_prime -> SEPARATOR exp functioncall_prime .
+
+    EOS             reduce using rule 51 (functioncall_prime -> SEPARATOR exp functioncall_prime .)
+    ELSEIF          reduce using rule 51 (functioncall_prime -> SEPARATOR exp functioncall_prime .)
+    ELSE            reduce using rule 51 (functioncall_prime -> SEPARATOR exp functioncall_prime .)
+    EMPTY           reduce using rule 51 (functioncall_prime -> SEPARATOR exp functioncall_prime .)
+
+
+state 196
+
+    (36) assignment_second_prime -> LEFTB exp . RIGHTB
+
+    RIGHTB          shift and go to state 220
+
+
+state 197
+
+    (37) condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body . RIGHTB
+
+    RIGHTB          shift and go to state 221
+
+
+state 198
+
+    (40) condition_prime -> SEPARATOR assignment condition_prime .
+
+    EOS             reduce using rule 40 (condition_prime -> SEPARATOR assignment condition_prime .)
+    ELSEIF          reduce using rule 40 (condition_prime -> SEPARATOR assignment condition_prime .)
+    ELSE            reduce using rule 40 (condition_prime -> SEPARATOR assignment condition_prime .)
+    EMPTY           reduce using rule 40 (condition_prime -> SEPARATOR assignment condition_prime .)
+
+
+state 199
+
+    (41) condition_prime -> EOS compoundexp EOS . increment RIGHTP LEFTB body RIGHTB
+    (27) increment -> . ID increment_prime
+
+    ID              shift and go to state 223
+
+    increment                      shift and go to state 222
+
+state 200
+
+    (43) condition_third_prime -> statement condition_fourth_prime .
+
+    EOS             reduce using rule 43 (condition_third_prime -> statement condition_fourth_prime .)
+    ELSEIF          reduce using rule 43 (condition_third_prime -> statement condition_fourth_prime .)
+    ELSE            reduce using rule 43 (condition_third_prime -> statement condition_fourth_prime .)
+    EMPTY           reduce using rule 43 (condition_third_prime -> statement condition_fourth_prime .)
+
+
+state 201
+
+    (45) condition_fourth_prime -> ELSEIF . condition_second_prime
+    (42) condition_second_prime -> . LEFTP compoundexp RIGHTP condition_third_prime
+
+    LEFTP           shift and go to state 58
+
+    condition_second_prime         shift and go to state 224
+
+state 202
+
+    (46) condition_fourth_prime -> ELSE . condition_fifth_prime
+    (48) condition_fifth_prime -> . statement
+    (49) condition_fifth_prime -> . LEFTB body RIGHTB
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    LEFTB           shift and go to state 227
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    condition_fifth_prime          shift and go to state 225
+    statement                      shift and go to state 226
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 203
+
+    (47) condition_fourth_prime -> EMPTY .
+
+    EOS             reduce using rule 47 (condition_fourth_prime -> EMPTY .)
+    ELSEIF          reduce using rule 47 (condition_fourth_prime -> EMPTY .)
+    ELSE            reduce using rule 47 (condition_fourth_prime -> EMPTY .)
+    EMPTY           reduce using rule 47 (condition_fourth_prime -> EMPTY .)
+
+
+state 204
+
+    (44) condition_third_prime -> LEFTB body . RIGHTB condition_fourth_prime
+
+    RIGHTB          shift and go to state 228
+
+
+state 205
+
+    (88) specialfunction_prime -> CIRCLE LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 88 (specialfunction_prime -> CIRCLE LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 88 (specialfunction_prime -> CIRCLE LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 88 (specialfunction_prime -> CIRCLE LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 88 (specialfunction_prime -> CIRCLE LEFTP exp RIGHTP .)
+
+
+state 206
+
+    (89) specialfunction_prime -> SQUARE LEFTP exp SEPARATOR . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 229
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 207
+
+    (90) specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 230
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 208
+
+    (91) specialfunction_prime -> FORWARD LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 91 (specialfunction_prime -> FORWARD LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 91 (specialfunction_prime -> FORWARD LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 91 (specialfunction_prime -> FORWARD LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 91 (specialfunction_prime -> FORWARD LEFTP exp RIGHTP .)
+
+
+state 209
+
+    (92) specialfunction_prime -> BACK LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 92 (specialfunction_prime -> BACK LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 92 (specialfunction_prime -> BACK LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 92 (specialfunction_prime -> BACK LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 92 (specialfunction_prime -> BACK LEFTP exp RIGHTP .)
+
+
+state 210
+
+    (93) specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 93 (specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 93 (specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 93 (specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 93 (specialfunction_prime -> TURNRIGHT LEFTP exp RIGHTP .)
+
+
+state 211
+
+    (94) specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 94 (specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 94 (specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 94 (specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 94 (specialfunction_prime -> TURNLEFT LEFTP exp RIGHTP .)
+
+
+state 212
+
+    (95) specialfunction_prime -> COLOR LEFTP exp SEPARATOR . exp SEPARATOR exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 231
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 213
+
+    (96) specialfunction_prime -> ARCH LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 96 (specialfunction_prime -> ARCH LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 96 (specialfunction_prime -> ARCH LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 96 (specialfunction_prime -> ARCH LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 96 (specialfunction_prime -> ARCH LEFTP exp RIGHTP .)
+
+
+state 214
+
+    (97) specialfunction_prime -> LINE LEFTP exp SEPARATOR . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 232
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 215
+
+    (98) specialfunction_prime -> THICKNESS LEFTP exp RIGHTP .
+
+    EOS             reduce using rule 98 (specialfunction_prime -> THICKNESS LEFTP exp RIGHTP .)
+    ELSEIF          reduce using rule 98 (specialfunction_prime -> THICKNESS LEFTP exp RIGHTP .)
+    ELSE            reduce using rule 98 (specialfunction_prime -> THICKNESS LEFTP exp RIGHTP .)
+    EMPTY           reduce using rule 98 (specialfunction_prime -> THICKNESS LEFTP exp RIGHTP .)
+
+
+state 216
+
+    (20) modules_third_prime -> SEPARATOR modules_second_prime .
+
+    MAIN            reduce using rule 20 (modules_third_prime -> SEPARATOR modules_second_prime .)
+
+
+state 217
+
+    (21) modules_third_prime -> RIGHTP LEFTP . vars body RIGHTP
+    (2) vars -> . type vars_prime vars_fourth_prime
+    (10) type -> . TYPEINT
+    (11) type -> . TYPEFLOAT
+    (12) type -> . TYPECHAR
+
+    TYPEINT         shift and go to state 6
+    TYPEFLOAT       shift and go to state 7
+    TYPECHAR        shift and go to state 8
+
+    vars                           shift and go to state 233
+    type                           shift and go to state 5
+
+state 218
+
+    (76) operand_second_prime -> LEFTB exp . RIGHTB
+
+    RIGHTB          shift and go to state 234
+
+
+state 219
+
+    (77) operand_third_prime -> SEPARATOR exp operand_third_prime .
+
+    MULTIPLY        reduce using rule 77 (operand_third_prime -> SEPARATOR exp operand_third_prime .)
+    DIVIDE          reduce using rule 77 (operand_third_prime -> SEPARATOR exp operand_third_prime .)
+    EMPTY           reduce using rule 77 (operand_third_prime -> SEPARATOR exp operand_third_prime .)
+
+
+state 220
+
+    (36) assignment_second_prime -> LEFTB exp RIGHTB .
+
+    EQUALS          reduce using rule 36 (assignment_second_prime -> LEFTB exp RIGHTB .)
+
+
+state 221
+
+    (37) condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB .
+
+    EOS             reduce using rule 37 (condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB .)
+    ELSEIF          reduce using rule 37 (condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB .)
+    ELSE            reduce using rule 37 (condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB .)
+    EMPTY           reduce using rule 37 (condition -> WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB .)
+
+
+state 222
+
+    (41) condition_prime -> EOS compoundexp EOS increment . RIGHTP LEFTB body RIGHTB
+
+    RIGHTP          shift and go to state 235
+
+
+state 223
+
+    (27) increment -> ID . increment_prime
+    (28) increment_prime -> . EQUALS increment_second_prime
+    (29) increment_prime -> . PLUS PLUS
+
+    EQUALS          shift and go to state 237
+    PLUS            shift and go to state 238
+
+    increment_prime                shift and go to state 236
+
+state 224
+
+    (45) condition_fourth_prime -> ELSEIF condition_second_prime .
+
+    EOS             reduce using rule 45 (condition_fourth_prime -> ELSEIF condition_second_prime .)
+    ELSEIF          reduce using rule 45 (condition_fourth_prime -> ELSEIF condition_second_prime .)
+    ELSE            reduce using rule 45 (condition_fourth_prime -> ELSEIF condition_second_prime .)
+    EMPTY           reduce using rule 45 (condition_fourth_prime -> ELSEIF condition_second_prime .)
+
+
+state 225
+
+    (46) condition_fourth_prime -> ELSE condition_fifth_prime .
+
+    EOS             reduce using rule 46 (condition_fourth_prime -> ELSE condition_fifth_prime .)
+    ELSEIF          reduce using rule 46 (condition_fourth_prime -> ELSE condition_fifth_prime .)
+    ELSE            reduce using rule 46 (condition_fourth_prime -> ELSE condition_fifth_prime .)
+    EMPTY           reduce using rule 46 (condition_fourth_prime -> ELSE condition_fifth_prime .)
+
+
+state 226
+
+    (48) condition_fifth_prime -> statement .
+
+    EOS             reduce using rule 48 (condition_fifth_prime -> statement .)
+    ELSEIF          reduce using rule 48 (condition_fifth_prime -> statement .)
+    ELSE            reduce using rule 48 (condition_fifth_prime -> statement .)
+    EMPTY           reduce using rule 48 (condition_fifth_prime -> statement .)
+
+
+state 227
+
+    (49) condition_fifth_prime -> LEFTB . body RIGHTB
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 239
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 228
+
+    (44) condition_third_prime -> LEFTB body RIGHTB . condition_fourth_prime
+    (45) condition_fourth_prime -> . ELSEIF condition_second_prime
+    (46) condition_fourth_prime -> . ELSE condition_fifth_prime
+    (47) condition_fourth_prime -> . EMPTY
+
+    ELSEIF          shift and go to state 201
+    ELSE            shift and go to state 202
+    EMPTY           shift and go to state 203
+
+    condition_fourth_prime         shift and go to state 240
+
+state 229
+
+    (89) specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp . RIGHTP
+
+    RIGHTP          shift and go to state 241
+
+
+state 230
+
+    (90) specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp . RIGHTP
+
+    RIGHTP          shift and go to state 242
+
+
+state 231
+
+    (95) specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp . SEPARATOR exp RIGHTP
+
+    SEPARATOR       shift and go to state 243
+
+
+state 232
+
+    (97) specialfunction_prime -> LINE LEFTP exp SEPARATOR exp . RIGHTP
+
+    RIGHTP          shift and go to state 244
+
+
+state 233
+
+    (21) modules_third_prime -> RIGHTP LEFTP vars . body RIGHTP
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 245
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 234
+
+    (76) operand_second_prime -> LEFTB exp RIGHTB .
+
+    MULTIPLY        reduce using rule 76 (operand_second_prime -> LEFTB exp RIGHTB .)
+    DIVIDE          reduce using rule 76 (operand_second_prime -> LEFTB exp RIGHTB .)
+    EMPTY           reduce using rule 76 (operand_second_prime -> LEFTB exp RIGHTB .)
+
+
+state 235
+
+    (41) condition_prime -> EOS compoundexp EOS increment RIGHTP . LEFTB body RIGHTB
+
+    LEFTB           shift and go to state 246
+
+
+state 236
+
+    (27) increment -> ID increment_prime .
+
+    RIGHTP          reduce using rule 27 (increment -> ID increment_prime .)
+
+
+state 237
+
+    (28) increment_prime -> EQUALS . increment_second_prime
+    (30) increment_second_prime -> . CSTI PLUS ID
+    (31) increment_second_prime -> . ID PLUS CSTI
+
+    CSTI            shift and go to state 248
+    ID              shift and go to state 249
+
+    increment_second_prime         shift and go to state 247
+
+state 238
+
+    (29) increment_prime -> PLUS . PLUS
+
+    PLUS            shift and go to state 250
+
+
+state 239
+
+    (49) condition_fifth_prime -> LEFTB body . RIGHTB
+
+    RIGHTB          shift and go to state 251
+
+
+state 240
+
+    (44) condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime .
+
+    EOS             reduce using rule 44 (condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime .)
+    ELSEIF          reduce using rule 44 (condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime .)
+    ELSE            reduce using rule 44 (condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime .)
+    EMPTY           reduce using rule 44 (condition_third_prime -> LEFTB body RIGHTB condition_fourth_prime .)
+
+
+state 241
+
+    (89) specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP .
+
+    EOS             reduce using rule 89 (specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSEIF          reduce using rule 89 (specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSE            reduce using rule 89 (specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP .)
+    EMPTY           reduce using rule 89 (specialfunction_prime -> SQUARE LEFTP exp SEPARATOR exp RIGHTP .)
+
+
+state 242
+
+    (90) specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP .
+
+    EOS             reduce using rule 90 (specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSEIF          reduce using rule 90 (specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSE            reduce using rule 90 (specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP .)
+    EMPTY           reduce using rule 90 (specialfunction_prime -> RECTANGLE LEFTP exp SEPARATOR exp RIGHTP .)
+
+
+state 243
+
+    (95) specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR . exp RIGHTP
+    (65) exp -> . term exp_prime
+    (79) term -> . factor term_prime
+    (83) factor -> . LEFTP expression RIGHTP
+    (84) factor -> . operand
+    (85) factor -> . PLUS operand
+    (86) factor -> . MINUS operand
+    (69) operand -> . CSTI
+    (70) operand -> . CSTF
+    (71) operand -> . ID operand_prime
+
+    LEFTP           shift and go to state 41
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
+    CSTI            shift and go to state 45
+    CSTF            shift and go to state 46
+    ID              shift and go to state 47
+
+    exp                            shift and go to state 252
+    term                           shift and go to state 39
+    factor                         shift and go to state 40
+    operand                        shift and go to state 42
+
+state 244
+
+    (97) specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP .
+
+    EOS             reduce using rule 97 (specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSEIF          reduce using rule 97 (specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP .)
+    ELSE            reduce using rule 97 (specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP .)
+    EMPTY           reduce using rule 97 (specialfunction_prime -> LINE LEFTP exp SEPARATOR exp RIGHTP .)
+
+
+state 245
+
+    (21) modules_third_prime -> RIGHTP LEFTP vars body . RIGHTP
+
+    RIGHTP          shift and go to state 253
+
+
+state 246
+
+    (41) condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB . body RIGHTB
+    (13) body -> . statement EOS body_prime
+    (22) statement -> . assignment
+    (23) statement -> . print
+    (24) statement -> . functioncall
+    (25) statement -> . condition
+    (26) statement -> . specialfunction
+    (32) assignment -> . ID assignment_prime EQUALS expression
+    (62) print -> . PRINT LEFTP print_prime
+    (50) functioncall -> . ID LEFTP exp functioncall_prime
+    (37) condition -> . WHILE LEFTP compoundexp RIGHTP LEFTB body RIGHTB
+    (38) condition -> . FOR LEFTP assignment condition_prime
+    (39) condition -> . IF condition_second_prime
+    (87) specialfunction -> . JEDO POINT specialfunction_prime
+
+    ID              shift and go to state 23
+    PRINT           shift and go to state 31
+    WHILE           shift and go to state 32
+    FOR             shift and go to state 33
+    IF              shift and go to state 34
+    JEDO            shift and go to state 35
+
+    body                           shift and go to state 254
+    statement                      shift and go to state 25
+    assignment                     shift and go to state 26
+    print                          shift and go to state 27
+    functioncall                   shift and go to state 28
+    condition                      shift and go to state 29
+    specialfunction                shift and go to state 30
+
+state 247
+
+    (28) increment_prime -> EQUALS increment_second_prime .
+
+    RIGHTP          reduce using rule 28 (increment_prime -> EQUALS increment_second_prime .)
+
+
+state 248
+
+    (30) increment_second_prime -> CSTI . PLUS ID
+
+    PLUS            shift and go to state 255
+
+
+state 249
+
+    (31) increment_second_prime -> ID . PLUS CSTI
+
+    PLUS            shift and go to state 256
+
+
+state 250
+
+    (29) increment_prime -> PLUS PLUS .
+
+    RIGHTP          reduce using rule 29 (increment_prime -> PLUS PLUS .)
+
+
+state 251
+
+    (49) condition_fifth_prime -> LEFTB body RIGHTB .
+
+    EOS             reduce using rule 49 (condition_fifth_prime -> LEFTB body RIGHTB .)
+    ELSEIF          reduce using rule 49 (condition_fifth_prime -> LEFTB body RIGHTB .)
+    ELSE            reduce using rule 49 (condition_fifth_prime -> LEFTB body RIGHTB .)
+    EMPTY           reduce using rule 49 (condition_fifth_prime -> LEFTB body RIGHTB .)
+
+
+state 252
+
+    (95) specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp . RIGHTP
+
+    RIGHTP          shift and go to state 257
+
+
+state 253
+
+    (21) modules_third_prime -> RIGHTP LEFTP vars body RIGHTP .
+
+    MAIN            reduce using rule 21 (modules_third_prime -> RIGHTP LEFTP vars body RIGHTP .)
+
+
+state 254
+
+    (41) condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body . RIGHTB
+
+    RIGHTB          shift and go to state 258
+
+
+state 255
+
+    (30) increment_second_prime -> CSTI PLUS . ID
+
+    ID              shift and go to state 259
+
+
+state 256
+
+    (31) increment_second_prime -> ID PLUS . CSTI
+
+    CSTI            shift and go to state 260
+
+
+state 257
+
+    (95) specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP .
+
+    EOS             reduce using rule 95 (specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP .)
+    ELSEIF          reduce using rule 95 (specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP .)
+    ELSE            reduce using rule 95 (specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP .)
+    EMPTY           reduce using rule 95 (specialfunction_prime -> COLOR LEFTP exp SEPARATOR exp SEPARATOR exp RIGHTP .)
+
+
+state 258
+
+    (41) condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB .
+
+    EOS             reduce using rule 41 (condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB .)
+    ELSEIF          reduce using rule 41 (condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB .)
+    ELSE            reduce using rule 41 (condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB .)
+    EMPTY           reduce using rule 41 (condition_prime -> EOS compoundexp EOS increment RIGHTP LEFTB body RIGHTB .)
+
+
+state 259
+
+    (30) increment_second_prime -> CSTI PLUS ID .
+
+    RIGHTP          reduce using rule 30 (increment_second_prime -> CSTI PLUS ID .)
+
+
+state 260
+
+    (31) increment_second_prime -> ID PLUS CSTI .
+
+    RIGHTP          reduce using rule 31 (increment_second_prime -> ID PLUS CSTI .)
 
