@@ -1,5 +1,5 @@
 class SemanticCube() :
-    #definining results between operation of the available types
+    #Defining results between operation of the available types
     def __init__(self) :
         self.semcub = {
             "int" : {
