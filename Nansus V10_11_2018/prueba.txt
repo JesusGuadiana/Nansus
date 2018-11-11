@@ -1,0 +1,15 @@
+program p;
+
+int a, b, c;
+
+function void jesus (int a, int b)
+{
+	d = a + b;
+}
+
+main
+
+if(a == c)
+	c = a + b;
+
+end
