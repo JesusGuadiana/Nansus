@@ -1,0 +1,21 @@
+program p;
+
+int a, b;
+float c;
+
+function void jesus (int d, int e)
+{
+	d = a + b;
+}
+
+main
+
+if(a == b)
+	c = a + b;
+
+for(c = 0; c < 0; c++)
+{
+	a = a + 1;
+};
+
+end
