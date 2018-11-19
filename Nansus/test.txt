@@ -1,0 +1,47 @@
+program p;
+int a, b;
+float c;
+
+function void jesus (int d, int e)
+{
+	float k;
+	d = a + b;
+	c = a * b;
+}
+
+function int Nando (int x, int y, float z)
+{
+	x = x - y;
+	return x;
+}
+
+main
+{
+		int x[7][4], y[3];
+		jesus(a, b);
+		Nando(a, a, c);
+
+		do
+		{
+			a = a + b;
+		}while(a < b)
+
+		readInput(a);
+		print(a, b, c);
+		jedo.circle(1+2);
+		jedo.square(1+2);
+		jedo.triangle(1+2);
+		jedo.thickness(1+2);
+		jedo.back(1+2);
+		jedo.turnRight(1+2);
+		jedo.turnLeft(1+2);
+		jedo.forward(1+2);
+		jedo.rectangle(1+2, 2+3);
+		jedo.restart();
+		jedo.stopfill();
+		jedo.startfill();
+		jedo.startpen();
+		jedo.stoppen();
+		jedo.color(1+2,1+2,1);
+		jedo.fillshape(1+2,3+1, 4.0+1);
+};
