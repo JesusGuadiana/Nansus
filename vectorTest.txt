@@ -1,0 +1,82 @@
+program p;
+
+main
+{
+	int a[5], b, c, d, e, findFlag, sortFlag, changeFlag, temp, temp2;
+
+	b = 0;
+	d = 0;
+	findFlag = 0;
+	sortFlag = 0;
+	changeFlag = 0;
+
+	print("");
+	print("Give me 5 numbers to store in the array:");
+	print("");
+
+	while(b < 5)
+	{
+		readInput(c);
+		a[b] = c;
+		b = b + 1;
+	}
+	print("");
+	print("What value should I try to find?");
+	print("");
+	readInput(c);
+
+	while(d < 5 && findFlag == 0)
+	{
+		if(a[d] == c)
+		{
+			print("The value is at index:");
+			print(d);
+			findFlag = 1;
+		}
+		d = d + 1;
+	}
+
+	if(findFlag == 0)
+	{
+		print("The value isn't in the array.");
+	}
+
+	print("Now for the sort.");
+	while(sortFlag == 0)
+	{
+		b = 0;
+		e = 1;
+		while(b < 4)
+		{
+			if(a[b] > a[e])
+			{
+				temp = a[e];
+				a[e] = a[b];
+				a[b] = temp;
+				changeFlag = 1;
+			}
+			b = b + 1;
+			e = e + 1;
+		}
+		if(changeFlag == 1)
+		{
+			changeFlag = 0;
+		}
+		else
+		{
+			sortFlag = 1;
+		}
+	}
+
+	print("Your sorted array looks like this:");
+	
+	b = 0;
+
+	while(b < 5)
+	{
+
+		print(a[b]);
+		b = b + 1;
+	}
+
+};

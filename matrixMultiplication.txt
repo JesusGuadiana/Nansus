@@ -1,0 +1,71 @@
+program p;
+
+main
+{
+	int a[2][2], b[2][2], e[2][2], readVar;
+	int c, d, f;
+	c = 0;
+	d = 0;
+	f = 0;
+	print("");
+	print("Please provide the values for the 2 x 2 Matrix #1 (numbers by row):");
+	print("");
+
+	while(c < 2)
+	{
+		d = 0;
+		while(d < 2)
+		{
+			readInput(readVar);
+			a[c][d] = readVar;
+			d = d + 1;
+
+		}
+		c = c + 1;
+	}
+	print("");
+	print("Please provide the values for the 2 x 2 Matrix #2 (numbers by row):");
+	print("");
+	c = 0;
+	while(c < 2)
+	{
+		d = 0;
+		while(d < 2)
+		{
+			readInput(readVar);
+			b[c][d] = readVar;
+			d = d + 1;
+		}
+		c = c + 1;
+	}
+	print("The result of the matrix multiplication is:");
+	c = 0;
+	while(c < 2)
+	{
+		d = 0;
+		while(d < 2)
+		{
+			f = 0;
+			while(f < 2)
+			{
+				e[c][d] = e[c][d] + a[c][f] * b[f][d];
+				f = f + 1;
+			}
+			d = d + 1;
+		}
+		c = c + 1;
+	}
+	c = 0;
+	while(c < 2)
+	{
+		print("Row");
+		d = 0;
+		while(d < 2)
+		{
+			print(e[c][d]);
+			d = d + 1;
+		}
+		c = c + 1;
+	}
+	print("Done");
+};

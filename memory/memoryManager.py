@@ -1,7 +1,8 @@
 # -----------------------------------------------------------------------------
-#  Juan Fernando and Jesus’ Programming Language Memory Manager
+#  Juan Fernando and Jesus’ Programming Language
+#  memoryManager.py
 #  (Handles the logic of value storage and Memory Allocation)
-#  Last edit: 14/11/2018
+#  Last edit: 18/11/2018
 # -----------------------------------------------------------------------------
 #Packages Imported
 import sys
@@ -16,46 +17,79 @@ class MemManager():
         self.identifier = identifier
         self.initial = initial
         self.final = initial + num_addresses - 1
-        self.partition_size = int(num_addresses / 3) #This is 2000 memory spaces per type of value
+        self.partition_size = int(num_addresses / 5) #This is 1500 memory spaces per type of value
 
         #Initial and final address for each of the three types of variable
-        int_initial = initial #Base + 0
-        self.int_final = initial + self.partition_size - 1 #Base + 1999
-        char_initial = initial + self.partition_size #Base + 2000
-        self.char_final = initial + self.partition_size * 2 - 1 #Base + 3999
-        float_initial = initial + self.partition_size * 2 #Base + 4000
-        self.float_final = initial + self.partition_size * 3 - 1 #Base + 5999
+        self.int_initial = initial #Base + 0
+        self.int_final = initial + self.partition_size - 1 #Base + 1199
+        self.char_initial = initial + self.partition_size #Base + 1200
+        self.char_final = initial + self.partition_size * 2 - 1 #Base + 2399
+        self.float_initial = initial + self.partition_size * 2 #Base + 2400
+        self.float_final = initial + self.partition_size * 3 - 1 #Base + 3599
+        self.bool_initial = initial + self.partition_size * 3 #Base + 3600
+        self.bool_final = initial + self.partition_size * 4 - 1 #Base + 4799
+        self.string_initial = initial + self.partition_size * 4 #Base + 4800
+        self.string_final = initial + self.partition_size * 5 - 1 #Base + 5999
 
         #Pointers to the current memory of each type
-        self.int_current = int_initial
-        self.char_current = char_initial
-        self.float_current = float_initial
+        self.int_current = self.int_initial
+        self.char_current = self.char_initial
+        self.float_current = self.float_initial
+        self.bool_current = self.bool_initial
+        self.string_current = self.string_initial
 
         #A subsegment dictionary in the form of a list for every utilized address type plus its value
         self.int_partition = {}
         self.char_partition = {}
         self.float_partition = {}
+        self.bool_partition = {}
+        self.string_partition = {}
 
     #Verifies that the address being requested is available within its designated type memory range
-    def available_address(self, part_type, addresses_to_assign = 0):
+    def possess_content(self, address):
+        if address in self.int_partition:
+            return True
+        elif address in self.char_partition:
+            return True;
+        elif address in self.float_partition:
+            return True;
+        elif address in self.bool_partition:
+            return True;
+        elif address in self.string_partition:
+            return True;
+        else:
+            False
+
+    def available_address(self, part_type, extra_addresses_to_assign = 0):
         if part_type == 'int':
-            if self.int_current + addresses_to_assign <= self.int_final:
+            if self.int_current + extra_addresses_to_assign <= self.int_final:
                 return True
             else:
                 return False
         elif part_type == 'float':
-            if self.float_current + addresses_to_assign <= self.float_final:
+            if self.float_current + extra_addresses_to_assign <= self.float_final:
                 return True
             else:
                 return False
         elif part_type == 'char':
-            if self.char_current + addresses_to_assign <= self.char_final:
+            if self.char_current + extra_addresses_to_assign <= self.char_final:
+                return True
+            else:
+                return False
+        elif part_type == 'bool':
+            if self.bool_current + extra_addresses_to_assign <= self.bool_final:
+                return True
+            else:
+                return False
+        elif part_type == 'string':
+            if self.string_current + extra_addresses_to_assign <= self.string_final:
                 return True
             else:
                 return False
 
     #Verifies that an address being used by getter or modifier exists before usage
     def valid_address(self, address):
+        part_type = self.check_partition_type(address)
         if part_type == 'int':
             if address in self.int_partition:
                 return True
@@ -71,12 +105,22 @@ class MemManager():
                 return True
             else:
                 return False
-        
+        elif part_type == 'bool':
+            if address in self.bool_partition:
+                return True
+            else:
+                return False
+        elif part_type == 'string':
+            if address in self.string_partition:
+                return True
+            else:
+                return False
+
     #Generates the address for a singular memory slot of specified type
-    def obtain_address(self, part_type, value=None):
+    def obtain_address(self, part_type, value = None):
         if part_type == 'int':
             if value is None:
-                value = 0
+                value = 1
             if self.available_address(part_type):
                 new_address = self.int_current
                 self.int_partition[new_address] = value
@@ -110,12 +154,36 @@ class MemManager():
                 print("There is no remaining space in the " + part_type + " memory partition.")
                 sys.exit()
 
+        elif part_type == 'bool':
+            if value is None:
+                value = False
+            if self.available_address(part_type):
+                new_address = self.bool_current
+                self.bool_partition[new_address] = value
+                self.bool_current += 1
+                return new_address
+            else:
+                print("There is no remaining space in the " + part_type + " memory partition.")
+                sys.exit()
+
+        elif part_type == 'string':
+            if value is None:
+                value = ""
+            if self.available_address(part_type):
+                new_address = self.string_current
+                self.string_partition[new_address] = value
+                self.string_current += 1
+                return new_address
+            else:
+                print("There is no remaining space in the " + part_type + " memory partition.")
+                sys.exit()
+
     #Generates the address for a multi-slot memory partition of specified type
     def obtain_sequential_addresses(self, part_type, addresses_to_assign, value=None):
         if part_type == 'int':
             if value is None:
                 value = 0
-            if self.available_address(part_type, addresses_to_assign):
+            if self.available_address(part_type, addresses_to_assign - 1):
                 base_address = self.int_current
 
                 for i in range(addresses_to_assign):
@@ -130,7 +198,7 @@ class MemManager():
         elif part_type == 'float':
             if value is None:
                 value = 0.0
-            if self.available_address(part_type, addresses_to_assign):
+            if self.available_address(part_type, extra_addresses_to_assign):
                 base_address = self.float_current
 
                 for i in range(addresses_to_assign):
@@ -145,12 +213,42 @@ class MemManager():
         elif part_type == 'char':
             if value is None:
                 value = ""
-            if self.available_address(part_type, addresses_to_assign):
+            if self.available_address(part_type, extra_addresses_to_assign):
                 base_address = self.char_current
 
                 for i in range(addresses_to_assign):
                     self.char_partition[self.char_current] = value
                     self.char_current += 1
+
+                return base_address
+            else:
+                print("There is no remaining space in the " + part_type + " memory partition.")
+                sys.exit()
+
+        elif part_type == 'bool':
+            if value is None:
+                value = ""
+            if self.available_address(part_type, extra_addresses_to_assign):
+                base_address = self.bool_current
+
+                for i in range(addresses_to_assign):
+                    self.bool_partition[self.bool_current] = value
+                    self.bool_current += 1
+
+                return base_address
+            else:
+                print("There is no remaining space in the " + part_type + " memory partition.")
+                sys.exit()
+
+        elif part_type == 'string':
+            if value is None:
+                value = ""
+            if self.available_address(part_type, extra_addresses_to_assign):
+                base_address = self.string_current
+
+                for i in range(addresses_to_assign):
+                    self.string_partition[self.string_current] = value
+                    self.string_current += 1
 
                 return base_address
             else:
@@ -165,13 +263,14 @@ class MemManager():
             return 'float'
         elif (address >= self.char_initial and address <= self.char_final):
             return 'char'
-        else:
-            print("Invalid address in the " + self.identifier + " memory")
-            sys.exit()
+        elif (address >= self.bool_initial and address <= self.bool_final):
+            return 'bool'
+        elif (address >= self.string_initial and address <= self.string_final):
+            return 'string'
 
     #Getter for the content within a memory address
     def recover_content(self, address):
-        part_type = self.verify_partition_type(address)
+        part_type = self.check_partition_type(address)
         if part_type == 'int':
             if self.valid_address(address):
                 return self.int_partition[address]
@@ -190,10 +289,22 @@ class MemManager():
             else:
                 print("The address type does not match the value type.")
                 return None
+        elif part_type == 'bool':
+            if self.valid_address(address):
+                return self.bool_partition[address]
+            else:
+                print("The address type does not match the value type.")
+                return None
+        elif part_type == 'string':
+            if self.valid_address(address):
+                return self.string_partition[address]
+            else:
+                print("The address type does not match the value type.")
+                return None
 
     #Setter for the content within a memory address
     def modify_value(self, address, value):
-        part_type = self.verify_part_type(address)
+        part_type = self.check_partition_type(address)
         if part_type == 'int':
             if self.valid_address(address):
                 self.int_partition[address] = value
@@ -209,6 +320,18 @@ class MemManager():
         elif part_type == 'char':
             if self.valid_address(address):
                 self.char_partition[address] = value
+            else:
+                print("The value entered for the modification is not compatible with the address type.")
+                sys.exit()
+        elif part_type == 'bool':
+            if self.valid_address(address):
+                self.bool_partition[address] = value
+            else:
+                print("The value entered for the modification is not compatible with the address type.")
+                sys.exit()
+        elif part_type == 'string':
+            if self.valid_address(address):
+                self.string_partition[address] = value
             else:
                 print("The value entered for the modification is not compatible with the address type.")
                 sys.exit()
@@ -234,11 +357,27 @@ class MemManager():
                     return address
                 return None
 
+        elif part_type == 'bool':
+            for address, value in self.bool_partition.items():
+                if value == e_value:
+                    return address
+                return None
+
+        elif part_type == 'string':
+            for address, value in self.string_partition.items():
+                if value == e_value:
+                    return address
+                return None
+
     #Resets the memory usage to the default and clears the used up memory dictionaries
     def reset_memory(self):
         self.int_partition.clear()
         self.float_partition.clear()
         self.char_partition.clear()
+        self.bool_partition.clear()
+        self.string_partition.clear()
         self.int_current = self.int_initial
         self.float_current = self.float_current
         self.char_current = self.char_current
+        self.bool_current = self.bool_current
+        self.string_current = self.string_current

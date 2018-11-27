@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
-#  Juan Fernando and Jesus’ Programming Language Lexer
-#  Last edit: 14/11/2018
+#  Juan Fernando and Jesus’ Programming Language
+#  lex.py
+#  Last edit: 18/11/2018
 # -----------------------------------------------------------------------------
 
 # Build the lexer
@@ -13,11 +14,10 @@ import sys
 reservedWords = {
 'program'   :   'PRGM',
 'main'      :   'MAIN',
-'end'       :   'END',
 'function'  :   'FUNCTION',
 'while'     :   'WHILE',
-'for'       :   'FOR',
 'if'        :   'IF',
+'do'        :   'DO',
 'else'      :   'ELSE',
 'elseif'    :   'ELSEIF',
 'print'     :   'PRINT',
@@ -25,26 +25,36 @@ reservedWords = {
 'circle'    :   'CIRCLE',
 'square'    :   'SQUARE',
 'rectangle' :   'RECTANGLE',
+'triangle'  :   'TRIANGLE',
 'forward'   :   'FORWARD',
 'back'      :   'BACK',
 'turnRight' :   'TURNRIGHT',
 'turnLeft'  :   'TURNLEFT',
 'color'     :   'COLOR',
-'arch'      :   'ARCH',
-'line'      :   'LINE',
 'thickness' :   'THICKNESS',
+'startpen'  :   'STARTPEN',
+'stoppen'   :   'STOPPEN',
+'startfill' :   'STARTFILL',
+'fillshape' :   'FILLSHAPE',
+'stopfill'  :   'STOPFILL',
+'restart'   :   'RESTART',
 'int'       :   'TYPEINT',
 'float'     :   'TYPEFLOAT',
 'char'      :   'TYPECHAR',
-'void'      :   'NOTYPE'
+'void'      :   'NOTYPE',
+'return'    :   'RETURN',
+'readInput' :   'READINPUT',
+'create'    :   'CREATE',
+'drawDot'   :   'DRAWDOT',
+'arch'      :   'ARCH'
 }
 
 #Token Definition
 tokens = ['ID', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
-        'CSTI','CSTF','EOS','LEFTP', 'RIGHTP', 'LEFTB', 
+        'CSTI','CSTF', 'CSTC', 'CSTS', 'EOS','LEFTP', 'RIGHTP', 'LEFTB',
         'RIGHTB', 'LEFTBRACE', 'RIGHTBRACE', 'AND', 'OR',
         'SEPARATOR', 'POINT', 'EQUALS', 'GREATER', 'GREATEREQUAL',
-        'LESS', 'LESSEQUAL', 'EQUAL', 'NOTEQUAL', 'INCREMENT']
+        'LESS', 'LESSEQUAL', 'EQUAL', 'NOTEQUAL']
 
 #Add the reserved words to the token definition
 tokens += reservedWords.values()
@@ -54,8 +64,10 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_MULTIPLY = r'\*'
 t_DIVIDE =  r'/'
-t_CSTI = r'\d+'
-t_CSTF = r'\d*\.\d+'
+t_CSTI = r'-?\d+'
+t_CSTF = r'-?\d*\.\d+'
+t_CSTC = r'\'.\''
+t_CSTS = r'\".*\"'
 t_EOS = r'\;'
 t_LEFTP = r'\('
 t_RIGHTP = r'\)'
@@ -74,7 +86,6 @@ t_LESS = r'\<'
 t_LESSEQUAL = r'\<\='
 t_EQUAL = r'\=\='
 t_NOTEQUAL = r'\!\='
-t_INCREMENT = r'\+\+'
 
 #Only complex syntaxis token
 def t_ID(t):
@@ -95,14 +106,15 @@ def t_error(t):
 
 #Executes Lexer
 lexer = lex.lex()
-
+print("Type file to compile (include extension):")
+filename = input()
 #Resets compilerOutput.txt
 file = open('compilerOutput.txt', 'w')
 print_to_output_file("TOKENS GENERATED:\n")
 file.close()
 
 #Reads from test file
-file = open('test.txt','r')
+file = open(filename,'r')
 lexer.input(file.read())
 
 #Cycles through token list

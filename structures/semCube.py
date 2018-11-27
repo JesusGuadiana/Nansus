@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
-#  Juan Fernando and Jesus’ Programming Language Semantic Cube Structure
-#  Last edit: 14/11/2018
+#  Juan Fernando and Jesus’ Programming Language 
+#  semCube.py
+#  Last edit: 18/11/2018
 # -----------------------------------------------------------------------------
 
 #Class Name
@@ -25,7 +26,9 @@ class SemanticCube() :
                     "==" : "bool",
                     "<=" : "bool",
                     ">=" : "bool",
-                    "!=" : "bool"
+                    "!=" : "bool",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Floating Point Numbers
@@ -40,7 +43,9 @@ class SemanticCube() :
                     "==" : "bool",
                     "<=" : "bool",
                     ">=" : "bool",
-                    "!=" : "bool"
+                    "!=" : "bool",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Characters
@@ -55,7 +60,26 @@ class SemanticCube() :
                     "==" : "error",
                     "<=" : "error",
                     ">=" : "error",
-                    "!=" : "error"
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Booleans
+                "bool" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "bool",
+                    "||" : "bool"
                 }},
 
         #Character interactions with:
@@ -73,7 +97,9 @@ class SemanticCube() :
                     "==" : "error",
                     "<=" : "error",
                     ">=" : "error",
-                    "!=" : "error"
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Floating Point Numbers
@@ -88,7 +114,9 @@ class SemanticCube() :
                     "==" : "error",
                     "<=" : "error",
                     ">=" : "error",
-                    "!=" : "error"
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Characters
@@ -103,7 +131,26 @@ class SemanticCube() :
                     "==" : "error",
                     "<=" : "error",
                     ">=" : "error",
-                    "!=" : "error"
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Booleans
+                "bool" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "bool",
+                    "||" : "bool"
                 }},
 
         #Floating Point Number interactions with:
@@ -121,7 +168,9 @@ class SemanticCube() :
                     "==" : "bool",
                     "<=" : "bool",
                     ">=" : "bool",
-                    "!=" : "bool"
+                    "!=" : "bool",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Floating Point Numbers
@@ -136,7 +185,9 @@ class SemanticCube() :
                     "==" : "bool",
                     "<=" : "bool",
                     ">=" : "bool",
-                    "!=" : "bool"
+                    "!=" : "bool",
+                    "&&" : "error",
+                    "||" : "error"
                 },
 
             #Characters
@@ -151,8 +202,98 @@ class SemanticCube() :
                     "==" : "error",
                     "<=" : "error",
                     ">=" : "error",
-                    "!=" : "error"
-                }}
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Booleans
+                "bool" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "bool",
+                    "||" : "bool"
+                }},
+
+        #Boolean interactions with:
+            "bool" : {
+
+            #Integers
+                "int" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Floating Point Numbers
+                "float" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Characters
+                "char" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "error",
+                    "||" : "error"
+                },
+
+            #Booleans
+                "bool" : {
+                    "+" : "error",
+                    "-" : "error",
+                    "/" : "error",
+                    "*" : "error",
+                    "=" : "error",
+                    "<" : "error",
+                    ">" : "error",
+                    "==" : "error",
+                    "<=" : "error",
+                    ">=" : "error",
+                    "!=" : "error",
+                    "&&" : "bool",
+                    "||" : "bool"
+                }}    
             }
 
 

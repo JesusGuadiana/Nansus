@@ -1,21 +1,64 @@
 program p;
-
-int a, b;
-float c;
-
-function void jesus (int d, int e)
+function int sorry(int j)
 {
-	d = a + b;
+	print(j);
+	while(j < 10)
+	{
+		j = function sorry(j + 1);
+	}
+	return j;
 }
 
 main
-
-if(a == b)
-	c = a + b;
-
-for(c = 0; c < 0; c++)
 {
-	a = a + 1;
-};
+	int x, y;
+	int a, b, c, n, m, d;
+	int j, k;
+	x = 1;
+	y = 1;
+	b = 1;
+	c = 1;
+	d = 1;
+	print("");
+	print("Enter the number to calculate the factorial:");
+	print("");
+	readInput(x);
+	while(x > 1)
+	{
+		y = y * x;
+		x = x - 1;
+	}
+	print("");
+	print("The while loop says that your value is:");
+	print(y);
+	print("");
 
-end
+	print("Enter the number of elements you want from the base fibonacci sequence: ");
+	print("");
+	readInput(n);
+	m = n;
+	print("");
+	print("The do while, if, elseif and else say that your answer is: ");
+	print("");
+	do{
+		if(n == m)
+		{
+			print(1);
+			n = n - 1;
+		}
+		elseif(n == m - 1)
+		{
+			print(1);
+			n = n - 1;
+		}
+		else
+		{
+			a = b + c;
+			b = c;
+			c = a;
+			print (a);
+			n = n - 1;
+		}
+	}while (n > 0)
+	j = 1;
+};

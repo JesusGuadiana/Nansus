@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
-#  Juan Fernando and Jesus’ Programming Language Quadruple Structure
+#  Juan Fernando and Jesus’ Programming Language 
+#  quad.py
 #  Last edit: 14/11/2018
 # -----------------------------------------------------------------------------
 
@@ -9,7 +10,7 @@ class Quad():
     #Constructor for the Quadruple Class
     def __init__(self, quad_number, operator, left_operand, right_operand,
             result):
-        
+        #Basic structure of a quadruple
         self.quad_number = quad_number
         self.operator = operator
         self.left_operand = left_operand

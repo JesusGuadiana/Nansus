@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 #  Juan Fernando and Jesus’ Programming Language VarTable Structure
-#  Last edit: 14/11/2018
+#  Last edit: 18/11/2018
 # -----------------------------------------------------------------------------
 
 #Class Name
@@ -15,7 +15,9 @@ class VarTable():
         self.list_of_variables[identifier] = {
             'identifier' : identifier,
             'type' : v_type,
-            'address' : address
+            'address' : address,
+            'dimension_one' : -1,
+            'dimension_two' : -1,
         }
 
     #Getter function for a single variable within the local VarTable
@@ -30,6 +32,15 @@ class VarTable():
     def variable_exists(self, identifier):
         return identifier in self.list_of_variables.keys()
 
-    #Creates a new 1 or 2 dimension variable
-    def new_variable_vector_or_matrix(self, identifier):
-        self.list_of_variables[identifier['identifier']] = identifier
+    #Vector assignment of first dimension
+    def set_dimension_one(self, identifier, value):
+        if self.variable_exists(identifier):
+            self.list_of_variables[identifier]['dimension_one'] = value
+        else:
+            print ("Variable " + identifier + " does not exist in this function.")
+
+    def set_dimension_two(self, identifier, value):
+        if self.variable_exists(identifier):
+            self.list_of_variables[identifier]['dimension_two'] = value
+        else:
+            print ("Variable " + identifier + " does not exist in this function.")

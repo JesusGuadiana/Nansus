@@ -1,0 +1,79 @@
+program p;
+int a, b, x, y;
+float c;
+
+
+main
+{
+a = 2;
+b = 1;
+c = 20;
+
+
+jedo.create();
+
+jedo.circle(25*5);
+jedo.restart();
+
+x = 25;
+y = 35;
+jedo.rectangle(x, y);
+jedo.restart();
+
+jedo.triangle(x+y);
+jedo.restart();
+
+jedo.startfill();
+jedo.fillshape("red");
+jedo.circle(500/5);
+jedo.stopfill();
+jedo.forward(20);
+jedo.restart();
+
+while(a < 200){
+jedo.square(a);
+a = a + 10;
+}
+jedo.restart();
+
+while(b < 10){
+jedo.forward(10);
+jedo.stoppen();
+jedo.drawDot(5, "blue");
+jedo.startpen();
+b = b + 1;
+}
+
+jedo.arch(50,"right");
+b = 0;
+while(b < 10){
+jedo.forward(10);
+jedo.stoppen();
+jedo.drawDot(5, "blue");
+jedo.startpen();
+b = b + 1;
+}
+
+jedo.restart();
+
+a = 2;
+b = 5;
+
+if(a > b){
+	jedo.thickness(a);
+	jedo.color("green");
+} else {
+	jedo.thickness(b);
+	jedo.color("red");
+}
+
+jedo.forward(2000/100);
+jedo.arch(50, "right");
+jedo.forward(2000/100);
+
+jedo.stoppen();
+jedo.forward(25);
+jedo.startpen();
+jedo.circle(75);
+
+};

@@ -3,70 +3,260 @@ TOKENS GENERATED:
 LexToken(PRGM,'program',1,0)
 LexToken(ID,'p',1,8)
 LexToken(EOS,';',1,9)
-LexToken(TYPEINT,'int',1,12)
-LexToken(ID,'a',1,16)
-LexToken(SEPARATOR,',',1,17)
-LexToken(ID,'b',1,19)
-LexToken(EOS,';',1,20)
-LexToken(TYPEFLOAT,'float',1,22)
-LexToken(ID,'c',1,28)
-LexToken(EOS,';',1,29)
-LexToken(FUNCTION,'function',1,32)
-LexToken(NOTYPE,'void',1,41)
-LexToken(ID,'jesus',1,46)
-LexToken(LEFTP,'(',1,52)
-LexToken(TYPEINT,'int',1,53)
-LexToken(ID,'d',1,57)
-LexToken(SEPARATOR,',',1,58)
-LexToken(TYPEINT,'int',1,60)
-LexToken(ID,'e',1,64)
-LexToken(RIGHTP,')',1,65)
-LexToken(LEFTBRACE,'{',1,67)
-LexToken(ID,'d',1,70)
-LexToken(EQUALS,'=',1,72)
-LexToken(ID,'a',1,74)
-LexToken(PLUS,'+',1,76)
-LexToken(ID,'b',1,78)
-LexToken(EOS,';',1,79)
-LexToken(RIGHTBRACE,'}',1,81)
-LexToken(MAIN,'main',1,84)
-LexToken(IF,'if',1,90)
-LexToken(LEFTP,'(',1,92)
-LexToken(ID,'a',1,93)
-LexToken(EQUAL,'==',1,95)
-LexToken(ID,'b',1,98)
-LexToken(RIGHTP,')',1,99)
-LexToken(ID,'c',1,102)
-LexToken(EQUALS,'=',1,104)
-LexToken(ID,'a',1,106)
-LexToken(PLUS,'+',1,108)
-LexToken(ID,'b',1,110)
-LexToken(EOS,';',1,111)
-LexToken(FOR,'for',1,114)
-LexToken(LEFTP,'(',1,117)
-LexToken(ID,'c',1,118)
-LexToken(EQUALS,'=',1,120)
-LexToken(CSTI,'0',1,122)
-LexToken(EOS,';',1,123)
-LexToken(ID,'c',1,125)
-LexToken(LESS,'<',1,127)
-LexToken(CSTI,'0',1,129)
-LexToken(EOS,';',1,130)
-LexToken(ID,'c',1,132)
-LexToken(INCREMENT,'++',1,133)
-LexToken(RIGHTP,')',1,135)
-LexToken(LEFTBRACE,'{',1,137)
-LexToken(ID,'a',1,140)
-LexToken(EQUALS,'=',1,142)
-LexToken(ID,'a',1,144)
-LexToken(PLUS,'+',1,146)
-LexToken(CSTI,'1',1,148)
-LexToken(EOS,';',1,149)
-LexToken(RIGHTBRACE,'}',1,151)
-LexToken(EOS,';',1,152)
-LexToken(END,'end',1,155)
-
+LexToken(FUNCTION,'function',1,11)
+LexToken(TYPEINT,'int',1,20)
+LexToken(ID,'factorial',1,24)
+LexToken(LEFTP,'(',1,33)
+LexToken(TYPEINT,'int',1,34)
+LexToken(ID,'a',1,38)
+LexToken(SEPARATOR,',',1,39)
+LexToken(TYPEINT,'int',1,41)
+LexToken(ID,'b',1,45)
+LexToken(RIGHTP,')',1,46)
+LexToken(LEFTBRACE,'{',1,48)
+LexToken(IF,'if',1,51)
+LexToken(LEFTP,'(',1,53)
+LexToken(ID,'b',1,54)
+LexToken(EQUAL,'==',1,56)
+LexToken(CSTI,'1',1,59)
+LexToken(RIGHTP,')',1,60)
+LexToken(LEFTBRACE,'{',1,63)
+LexToken(ID,'a',1,67)
+LexToken(EQUALS,'=',1,69)
+LexToken(ID,'a',1,71)
+LexToken(EOS,';',1,72)
+LexToken(RIGHTBRACE,'}',1,75)
+LexToken(ELSE,'else',1,78)
+LexToken(LEFTBRACE,'{',1,84)
+LexToken(ID,'a',1,88)
+LexToken(EQUALS,'=',1,90)
+LexToken(ID,'b',1,92)
+LexToken(MULTIPLY,'*',1,94)
+LexToken(FUNCTION,'function',1,96)
+LexToken(ID,'factorial',1,105)
+LexToken(LEFTP,'(',1,114)
+LexToken(ID,'a',1,115)
+LexToken(SEPARATOR,',',1,116)
+LexToken(ID,'b',1,118)
+LexToken(MINUS,'-',1,120)
+LexToken(CSTI,'1',1,122)
+LexToken(RIGHTP,')',1,123)
+LexToken(EOS,';',1,124)
+LexToken(RIGHTBRACE,'}',1,127)
+LexToken(RETURN,'return',1,130)
+LexToken(ID,'a',1,137)
+LexToken(EOS,';',1,138)
+LexToken(RIGHTBRACE,'}',1,140)
+LexToken(MAIN,'main',1,143)
+LexToken(LEFTBRACE,'{',1,148)
+LexToken(TYPEINT,'int',1,151)
+LexToken(ID,'a',1,155)
+LexToken(SEPARATOR,',',1,156)
+LexToken(ID,'b',1,158)
+LexToken(SEPARATOR,',',1,159)
+LexToken(ID,'c',1,161)
+LexToken(EOS,';',1,162)
+LexToken(PRINT,'print',1,165)
+LexToken(LEFTP,'(',1,170)
+LexToken(CSTS,'""',1,171)
+LexToken(RIGHTP,')',1,173)
+LexToken(EOS,';',1,174)
+LexToken(PRINT,'print',1,177)
+LexToken(LEFTP,'(',1,182)
+LexToken(CSTS,'"Enter the number to calculate the factorial:"',1,183)
+LexToken(RIGHTP,')',1,229)
+LexToken(EOS,';',1,230)
+LexToken(PRINT,'print',1,233)
+LexToken(LEFTP,'(',1,238)
+LexToken(CSTS,'""',1,239)
+LexToken(RIGHTP,')',1,241)
+LexToken(EOS,';',1,242)
+LexToken(READINPUT,'readInput',1,245)
+LexToken(LEFTP,'(',1,254)
+LexToken(ID,'a',1,255)
+LexToken(RIGHTP,')',1,256)
+LexToken(EOS,';',1,257)
+LexToken(ID,'b',1,260)
+LexToken(EQUALS,'=',1,262)
+LexToken(ID,'a',1,264)
+LexToken(MINUS,'-',1,266)
+LexToken(CSTI,'1',1,268)
+LexToken(EOS,';',1,269)
+LexToken(PRINT,'print',1,272)
+LexToken(LEFTP,'(',1,277)
+LexToken(CSTS,'""',1,278)
+LexToken(RIGHTP,')',1,280)
+LexToken(EOS,';',1,281)
+LexToken(PRINT,'print',1,284)
+LexToken(LEFTP,'(',1,289)
+LexToken(CSTS,'"The recursive function for factorial says that your answer is:"',1,290)
+LexToken(RIGHTP,')',1,354)
+LexToken(EOS,';',1,355)
+LexToken(ID,'c',1,358)
+LexToken(EQUALS,'=',1,360)
+LexToken(FUNCTION,'function',1,362)
+LexToken(ID,'factorial',1,371)
+LexToken(LEFTP,'(',1,380)
+LexToken(ID,'a',1,381)
+LexToken(SEPARATOR,',',1,382)
+LexToken(ID,'b',1,384)
+LexToken(RIGHTP,')',1,385)
+LexToken(EOS,';',1,386)
+LexToken(PRINT,'print',1,389)
+LexToken(LEFTP,'(',1,394)
+LexToken(ID,'c',1,395)
+LexToken(RIGHTP,')',1,396)
+LexToken(EOS,';',1,397)
+LexToken(RIGHTBRACE,'}',1,399)
+LexToken(EOS,';',1,400)
 
 INTERMEDIATE CODE:
 
-1 | GOTO MAIN None None
+1 | GOTO MAIN None 15
+2 | == 16001 28000 25600
+3 | GOTOF 25600 None 6
+4 | = 16000 None 16000
+5 | GOTO None None 13
+6 | ERA factorial None None
+7 | PARAMETER 16000 None None
+8 | - 16001 28000 22000
+9 | PARAMETER 22000 None None
+10 | GOSUB factorial None 2
+11 | * 16001 10000 22001
+12 | = 22001 None 16000
+13 | RETURN 16000 None 10000
+14 | ENDPROC None None None
+15 | PRINT 26800 None None
+16 | PRINT 26801 None None
+17 | PRINT 26802 None None
+18 | READINPUT int None 16002
+19 | - 16002 28000 22002
+20 | = 22002 None 16003
+21 | PRINT 26803 None None
+22 | PRINT 26804 None None
+23 | ERA factorial None None
+24 | PARAMETER 16002 None None
+25 | PARAMETER 16003 None None
+26 | GOSUB factorial None 2
+27 | = 10000 None 16004
+28 | PRINT 16004 None None
+
+FUNCTION DIRECTORY:
+
+
+function : p
+  identifier : p
+  parameters : {
+    "parameter_types": [],
+    "parameter_addresses": [],
+    "parameter_counter": 0
+}
+  local_variables : {}
+  local_variable_counter : {
+    "int": 0,
+    "float": 0,
+    "char": 0
+}
+  temporary_variable_counter : {
+    "int": 0,
+    "float": 0,
+    "char": 0,
+    "bool": 0
+}
+  return_type : void
+  return_address : -1
+  quad_number : -1
+--------------------------------------------------------------------------------
+
+
+function : factorial
+  identifier : factorial
+  parameters : {
+    "parameter_types": [
+        "int",
+        "int"
+    ],
+    "parameter_addresses": [
+        16000,
+        16001
+    ],
+    "parameter_counter": 2
+}
+  local_variables : {
+    "a": {
+        "identifier": "a",
+        "type": "int",
+        "address": 16000,
+        "dimension_one": -1,
+        "dimension_two": -1
+    },
+    "b": {
+        "identifier": "b",
+        "type": "int",
+        "address": 16001,
+        "dimension_one": -1,
+        "dimension_two": -1
+    }
+}
+  local_variable_counter : {
+    "int": 2,
+    "float": 0,
+    "char": 0
+}
+  temporary_variable_counter : {
+    "int": 2,
+    "float": 0,
+    "char": 0,
+    "bool": 1
+}
+  return_type : int
+  return_address : 10000
+  quad_number : 2
+--------------------------------------------------------------------------------
+
+
+function : main
+  identifier : main
+  parameters : {
+    "parameter_types": [],
+    "parameter_addresses": [],
+    "parameter_counter": 0
+}
+  local_variables : {
+    "a": {
+        "identifier": "a",
+        "type": "int",
+        "address": 16002,
+        "dimension_one": -1,
+        "dimension_two": -1
+    },
+    "b": {
+        "identifier": "b",
+        "type": "int",
+        "address": 16003,
+        "dimension_one": -1,
+        "dimension_two": -1
+    },
+    "c": {
+        "identifier": "c",
+        "type": "int",
+        "address": 16004,
+        "dimension_one": -1,
+        "dimension_two": -1
+    }
+}
+  local_variable_counter : {
+    "int": 3,
+    "float": 0,
+    "char": 0
+}
+  temporary_variable_counter : {
+    "int": 1,
+    "float": 0,
+    "char": 0,
+    "bool": 0
+}
+  return_type : void
+  return_address : -1
+  quad_number : -1
+--------------------------------------------------------------------------------

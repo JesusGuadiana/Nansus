@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
-#  Juan Fernando and Jesus’ Programming Language Current Program Object Class
-#  Last edit: 14/11/2018
+#  Juan Fernando and Jesus’ Programming Language
+#  currentProgram.py
+#  Last edit: 18/11/2018
 # -----------------------------------------------------------------------------
 #Packages Imported
 from structures.funcDirectory import *
@@ -21,29 +22,27 @@ class CurrentProgram():
         self.scope_l = ""
 
         #Dimensioned variable management variables
-        self.current_vec_mat_variable = {}
-        self.vec_mat_variable_stack = []
+        self.vec_mat_first_dimension = 1
+        self.vec_mat_second_dimension = 1
         self.vec_mat_variable_flag = False
 
-        #Flag indicating a return
-        self.return_flag = False
-
-        #Temporary Variable Management Attributes
-        self.current_id = "";
+        #Temporary Management Attributes
+        self.current_func_id = ""
+        self.current_id = ""
+        self.current_array_id = ""
         self.current_type = ""
+        self.current_param_identifier = ""
+        self.current_param_type = ""
+        self.current_func_param_counter = 0
+        self.param_evaluation_counter = 0
         self.current_dim = 0;
-        self.temporary_vars = []
-        self.temporary_param_identifiers = []
-        self.temporary_param_types = []
         self.temporary_arg_types = []
-        self.temporary_var_counter = 0
 
         #Current Program's Stacks
         self.operand_stack = []
         self.type_stack = []
         self.operator_stack = []
         self.jump_stack = []
-        self.return_stack = []
 
         #Code Generation control and result variables
         self.quad_number = 1

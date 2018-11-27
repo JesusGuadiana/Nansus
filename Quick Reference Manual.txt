@@ -1,0 +1,94 @@
+Quick Reference Manual 
+
+Hi! This is the Quick Reference Manual for the Programming Language Nansus!
+For starters, some important things you must remember while you are programming in Nansus:
+
+1.	You must always include your program name in the format “program name;” at the beginning of the document when you are preparing your code. The name is yours to choose.
+2.	At this point, you can declare global variables and functions in any order you like until you reach a new context (within a function or the main) but remember that you can only declare variables at the start within contexts!
+3.	Another important thing to remember, is that variables in Nansus do not allow you to pre-initialize them at the time of declaration, they will by default be initialized to 0, 0.0 and ‘’ respectively for each of the three types, do not forget to assign your own values!
+4.	Do not forget to write the word main when opening your main segment, or your code will crash.
+5.	One you are all done, remember that the main must be closed with a; after closing your braces, otherwise the code will not compile!
+
+Now that we have gone over the basics, let’s divide this into some more specific sections:
+
+Operators:
++: For sum of binary operations
+	-: For difference of binary operations
+	*: For product of binary operations
+	/: For quotient of binary operations
+	>: For comparison in binary operations (Greater Than)
+	<: For comparison in binary operations (Less than)
+	>=: For comparison in binary operations (Greater than or Equal
+	<=: For comparison in binary operations (Less than or Equal)
+	==: For comparison in binary operations (Equal)
+	!=: For comparison in binary operations (Not Equal)
+	&&: For logic in binary operations (And operator)
+	||: For logic in binary operations (Or Operator)
+	Print(a): Prints value in the variable
+	readInput(a): Reads from input and stores in variable a
+	jedo.specialfunctions(): Will execute special drawing functions (more ahead).
+
+
+Typical Format for each operation:
+Assignment: 
+1.	A = 0;
+2.	A = b + c;
+3.	A = function nando(1, 2)
+
+Conditions:
+While (a < b) 
+{
+	
+}
+
+Do {
+	
+} while (b > 8 && c < 10)
+
+If (x == a)
+{
+ 	a = b;
+}
+elseif (x < a)
+{
+	b = b + a;
+} 
+else
+{ 
+	print a;
+}  
+
+You can, of course use different formats, as long as they don’t deviate from this standard.
+For function definition:
+Function name (type name, type name)
+{ 
+	a = 1; 
+	}
+
+
+
+You can have multiple declarations, but again, remember that you can only declare variables at the beginning of each context.
+	For the special functions we have:
+
+•	jedo.circle(1) : You can indicate the size of the radius for the circle to draw.
+•	jedo.square(1): You can indicate the size of each of the sides of a square to draw.
+•	jedo.Rectangle(1, 2): You can indicate the size of length and width to draw a rectangle.
+•	jedo.drawDot(1, “blue”): You can specify the size of the dot and color in the second slot.
+•	jedo.arch(1, “left”): You can indicate the size of the arch and the direction (left of right) to which to draw it.
+•	jedo.triangle (1): You can indicate the height of the triangle to draw.
+•	jedo.forward(1): You can indicate the distance for jedo (the cursor) to move forward.
+•	jedo.forward(1): You can indicate the distance for jedo to move backwards (based on faced direction.
+•	jedo.turnLeft(1): You can indicate the angle at which you wish the cursor to move (in degrees) in the left direction.
+•	jedo.turnRight(1): You can indicate the angle at which you wish the cursor to move (in degrees) in the right direction.
+•	jedo.color(“red”): You can indicate with a string what color you wish to display on jedo (this will depend on availability)
+
+•	jedo.thickness(1):You can indicate the thickness of the line that jedo draws as it moves.
+•	jedo.startpen(): Restarts drawing the line behind jedo.
+•	jedo.create(): Creates the window for the jedo graphical output
+•	jedo.stoppen(): Ceases drawing lines behind jedo (jedo still moves)
+•	jedo.startfill(): Sets up the jedo drawing to know that it will be filled at some point of the figure.
+•	jedo.fillshape(“red”): This will paint the set-up jedo drawing from before and change it to a color that you specify with a string.
+
+•	jedo.stopfill(): Stop setting up figures to be colored. 
+•	Jedo.restart(): Clears the screen and begins jedo at the center of the screen once again.
+	With all this data, you should be prepared to explore the possibilities of the Nansus Programming Language! For further information, look for the full documentation of the Language, Happy Coding!

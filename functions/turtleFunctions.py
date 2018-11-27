@@ -1,3 +1,4 @@
+#Libraries imported
 from turtle import Turtle
 #Jedo object which implements special functions
 #(CIRCLE, SQUARE, RECTANGLE, FORWARD, BACK, TURNRIGHT, TURNLEFT, COLOR, ARCH, Line, thickness )
@@ -47,7 +48,7 @@ class Jedo(Turtle):
     def drawDot(self, radius, color="black"):
         self.dot(radius, color)
 
-    def fillShape(self, color):
+    def fillShape(self, color="black"):
         self.fillcolor(color)
 
     def startFill(self):

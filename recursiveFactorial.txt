@@ -1,0 +1,27 @@
+program p;
+function int factorial(int a, int b)
+{
+	if(b == 1)
+	{
+		a = a;
+	}
+	else
+	{
+		a = b * function factorial(a, b - 1);
+	}
+	return a;
+}
+
+main
+{
+	int a, b, c;
+	print("");
+	print("Enter the number to calculate the factorial:");
+	print("");
+	readInput(a);
+	b = a - 1;
+	print("");
+	print("The recursive function for factorial says that your answer is:");
+	c = function factorial(a, b);
+	print(c);
+};
